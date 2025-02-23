@@ -1,0 +1,65 @@
+@use 'sass:list' as l;
+
+@mixin grid($col-gap, $row-gap) {
+  @supports (grid-area: auto) {
+    display: grid;
+    grid-column-gap: $row-gap;
+    grid-row-gap: $col-gap;
+  }
+}
+
+@mixin gridAuto($min-width) {
+  grid-template: 1fr / repeat(auto-fit, minmax($min-width, 1fr));
+}
+
+@mixin gridLayout($row-gap, $col-gap, $grid-columns, $cols...) {
+  @include grid($row-gap, $col-gap);
+  @supports (grid-area: auto) {
+    grid-template-columns: repeat($grid-columns, 1fr);
+
+    $i: 1;
+    @each $col in $cols {
+      > :nth-child(#{$i}) {
+        display: grid;
+        grid-column-end: span l.nth($col, 1);
+        @if l.length($col) > 1 {
+          grid-row-end: span l.nth($col, 2);
+        }
+      }
+      $i: $i + 1;
+    }
+  }
+}
+
+@mixin gridAdvanced($grid-columns, $cols...) {
+  $i: 1;
+  > :nth-of-type(#{$i}) {
+    @if l.nth($col, 2) == -1 {
+      $span: $grid-columns - l.nth($col, 2) - l.nth($col, 1);
+    } @else {
+      $span: l.nth($col, 2) - l.nth($col, 1);
+    }
+    width: calc(
+      #{$span}*
+        ((100% - #{$gap-horizontal}*#{$grid-columns}) /#{$grid-columns}) +
+        (#{l.nth($col, 1)} - 1) *#{$gap-horizontal} - 1px
+    );
+    min-width: 0;
+  }
+  $i: $i + 1;
+
+  @supports (grid-area: auto) {
+    grid-template-columns: repeat($grid-columns, 1fr);
+
+    $i: 1;
+    @each $col in $cols {
+      > :nth-of-type(#{$i}) {
+        grid-column-start: l.nth($col, 1);
+        grid-column-end: l.nth($col, 2);
+        grid-row-start: l.nth($col, 3);
+        grid-row-end: l.nth($col, 4);
+      }
+    }
+    $i: $i + 1;
+  }
+}

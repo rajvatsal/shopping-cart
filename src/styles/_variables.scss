@@ -1,0 +1,152 @@
+@use 'sass:color';
+
+$clr-primary: purple;
+$clr-accent: steelblue;
+$clr-valid: green;
+$clr-invalid: red;
+$clr-warning: orange;
+
+:root {
+  /* --------------------------------
+
+  Colors
+
+  -------------------------------- */
+
+  --clr-neutral-900: #000;
+  --clr-neutral-800: #202020;
+  --clr-neutral-700: #3b3b3b;
+  --clr-neutral-600: #585858;
+  --clr-neutral-500: #767676;
+  --clr-neutral-400: #969696;
+  --clr-neutral-300: #b7b7b7;
+  --clr-neutral-200: #dadada;
+  --clr-neutral-160: #ededed;
+  --clr-neutral-150: #f4f4f4;
+  --clr-neutral-100: #fdfdfd;
+
+  --clr-primary-200: #{color.adjust(
+      $clr-primary,
+      $space: oklch,
+      $lightness: -20%
+    )};
+  --clr-primary-300: #{color.adjust(
+      $clr-primary,
+      $space: oklch,
+      $lightness: -10%
+    )};
+  --clr-primary-400: #{$clr-primary};
+
+  --clr-accent-300: #{color.adjust($accent, $space: oklch, $lightness: -10%)};
+  --clr-accent-400: #{$clr-accent};
+  --clr-accent-500: #{color.adjust($accent, $space: oklch, $lightness: 10%)};
+
+  /* Feedback Colors */
+  --clr-semantic_valid-400: #{$valid};
+  --clr-semantic_invalid-400: #{$invalid};
+  --clr-semantic_warning-400: #{$warning};
+
+  /* --------------------------------
+
+  Font Family
+
+  -------------------------------- */
+
+  /* --------------------------------
+
+  Font Size
+
+  -------------------------------- */
+
+  --fs-base: 1rem;
+  --fs-ratio: 1.25;
+  --fs-100: calc(1em / (var(--fs-ratio) * var(--fs-ratio)));
+  --fs-200: calc(1em / var(--fs-ratio));
+  --fs-300: calc(1em * var(--fs-ratio));
+  --fs-400: calc(1em * var(--fs-ratio) * var(--fs-ratio));
+  --fs-500: calc(1em * var(--fs-ratio) * var(--fs-ratio) * var(--fs-ratio));
+  --fs-600: calc(
+    1em * var(--fs-ratio) * var(--fs-ratio) * var(--fs-ratio) * var(--fs-ratio)
+  );
+  --fs-700: calc(
+    1em * var(--fs-ratio) * var(--fs-ratio) * var(--fs-ratio) *
+      var(--fs-ratio) * var(--fs-ratio)
+  );
+  --fs-800: calc(1em * pow(var(--fs-ratio), 5));
+  --fs-900: calc(1em * pow(var(--fs-ratio), 6));
+
+  /* --------------------------------
+
+  Space
+
+  -------------------------------- */
+
+  /* Fibonacci Sequence */
+  --sp-base: 16px;
+  --sp-100: calc(0.25 * var(--sp-base));
+  --sp-200: calc(0.5 * var(--sp-base));
+  --sp-300: calc(0.75 * var(--sp-base));
+  --sp-400: calc(1.25 * var(--sp-base));
+  --sp-500: calc(2 * var(--sp-base));
+  --sp-600: calc(3.25 * var(--sp-base));
+  --sp-700: calc(5.25 * var(--sp-base));
+
+  /* --------------------------------
+
+  Line Height
+
+  -------------------------------- */
+
+  --lh-body: 1.15em;
+  --lh-heading: 0.95em;
+
+  /* --------------------------------
+
+  Icons
+
+  -------------------------------- */
+
+  --icn-size-100: 16px;
+  --icn-size-200: 24px;
+  --icn-size-300: 32px;
+  --icn-size-400: 48px;
+  --icn-size-500: 64px;
+  --icn-size-600: 128px;
+
+  /* --------------------------------
+
+  Buttons
+
+  -------------------------------- */
+
+  --btn_ff: var(--ff-secondary-400);
+  --btn_fs: var(--fs-base);
+  --btn_radius: 4.8px;
+  --btn_paddding: var(--sp-300) var(--sp-500);
+
+  --btn_bg--primary: var(--clr-primary-400);
+  --btn_clr--primary: var(--clr-neutral-100);
+  --btn_bg--primary--active: var(--clr-primary-200);
+  --btn_clr--primary--active: var(--clr-primary-400);
+
+  --btn_bg--secondary: var(--clr-neutral-accent);
+  --btn_clr--secondary: var(--clr-neutral-800);
+  --btn_bg--secondary--active: var(--clr-neutral-300);
+  --btn_clr--secondary--active: var(--clr-neutral-900);
+
+  --btn_bg--accent: var(--clr-semantic_invalid-400);
+  --btn_clr--accent: var(--clr-semantic_invalid-100);
+  --btn_bg--accent--active: var(--clr-semantic_invalid-100);
+  --btn_clr--accent--active: var(--clr-semantic_invalid-400);
+
+  --btn_bg--accent_light: var(--clr-semantic_invalid-100);
+  --btn_clr--accent_light: var(--clr-semantic_invalid-400);
+  --btn_bg--accent_light--active: var(--clr-semantic_invalid-400);
+  --btn_clr--accent_light--active: var(--clr-semantic_invalid-100);
+
+  /* --------------------------------
+
+  Page Defaults
+
+  -------------------------------- */
+}

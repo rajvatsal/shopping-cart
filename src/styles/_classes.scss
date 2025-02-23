@@ -1,0 +1,40 @@
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/*
+ *-------------------------
+ * Icons
+ *-------------------------
+ */
+
+.icons {
+  display: inline-block;
+  color: var(--clr-neutral-900);
+  height: 1em;
+  aspect-ratio: 1 / 1;
+  line-height: 1;
+}
+
+.icons-container {
+  display: flex;
+  align-items: center;
+
+  .icon {
+    color: inherit;
+    margin-inline: 2px;
+  }
+}
+
+button.no-decoration {
+  border: 0;
+  background: transparent;
+}
+
+.img-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  object-fit: cover;
+}

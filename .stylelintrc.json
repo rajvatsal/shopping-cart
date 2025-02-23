@@ -1,0 +1,14 @@
+{
+	"extends": ["stylelint-config-sass-guidelines"],
+	"syntax": "scss",
+	"rules": {
+		"@stylistic/function-parentheses-space-inside": "never-single-line",
+		"@stylistic/indentation": "2",
+		"selector-no-qualifying-type": {
+			"ignore": ["attribute", "class", "id"]
+		},
+		"scss/dollar-variable-pattern": "",
+		"scss/at-extend-no-missing-placeholder": "never",
+		"max-nesting-depth": "3"
+	}
+}
