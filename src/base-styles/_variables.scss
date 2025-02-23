@@ -37,14 +37,18 @@ $clr-warning: orange;
     )};
   --clr-primary-400: #{$clr-primary};
 
-  --clr-accent-300: #{color.adjust($accent, $space: oklch, $lightness: -10%)};
+  --clr-accent-300: #{color.adjust(
+      $clr-accent,
+      $space: oklch,
+      $lightness: -10%
+    )};
   --clr-accent-400: #{$clr-accent};
-  --clr-accent-500: #{color.adjust($accent, $space: oklch, $lightness: 10%)};
+  --clr-accent-500: #{color.adjust($clr-accent, $space: oklch, $lightness: 10%)};
 
   /* Feedback Colors */
-  --clr-semantic_valid-400: #{$valid};
-  --clr-semantic_invalid-400: #{$invalid};
-  --clr-semantic_warning-400: #{$warning};
+  --clr-semantic_valid-400: #{$clr-valid};
+  --clr-semantic_invalid-400: #{$clr-invalid};
+  --clr-semantic_warning-400: #{$clr-warning};
 
   /* --------------------------------
 
