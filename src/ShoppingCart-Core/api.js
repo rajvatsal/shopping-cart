@@ -6,6 +6,10 @@ const fetchData = async () => {
 		},
 	);
 	res = await res.json();
+
+	fetch("https://fakestoreapi.com/products/categories")
+		.then((res) => res.json())
+		.then((json) => console.log(json));
 	return res;
 };
 
