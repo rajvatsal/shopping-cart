@@ -1,10 +1,7 @@
 const fetchData = async () => {
-	let res = await fetch(
-		"https://fakestoreapi.com/products/category/electronics",
-		{
-			mode: "cors",
-		},
-	);
+	let res = await fetch("https://fakestoreapi.com/products", {
+		mode: "cors",
+	});
 	res = await res.json();
 
 	fetch("https://fakestoreapi.com/products/categories")
