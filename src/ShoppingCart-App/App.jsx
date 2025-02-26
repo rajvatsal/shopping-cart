@@ -1,13 +1,12 @@
 import './App.scss'
 import { fetchData } from '../ShoppingCart-Core/api.js'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Product from './Product.jsx'
 import Categories from './CategoryFilter.jsx'
 
-const products = await fetchData()
-
 function App() {
   const [filter, setFilter] = useState([])
+  const [products, setProducts] = useState([])
 
   const addFilter = (newFilter) => {
     setFilter([...filter, newFilter])
@@ -15,6 +14,15 @@ function App() {
   const removeFilter = (oldFilter) => {
     setFilter(filter.filter((fl) => fl !== oldFilter))
   }
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const products = await fetchData()
+      setProducts(products)
+    }
+
+    getProducts()
+  }, [])
 
   return (
     <div>

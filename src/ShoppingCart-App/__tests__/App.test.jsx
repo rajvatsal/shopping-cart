@@ -1,7 +1,7 @@
 import App from '../App.jsx'
 import { describe, it, expect } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
-import { render, getByRole, prettyDOM } from '@testing-library/react'
+import { render, getByRole, waitFor } from '@testing-library/react'
 import { fetchData } from '../../ShoppingCart-Core/api.js'
 import Product from '../Product.jsx'
 
@@ -13,25 +13,31 @@ const { products } = await vi.hoisted(
 
 vi.mock('../../ShoppingCart-Core/api.js', () => {
   return {
-    fetchData: vi.fn(async () => products),
+    fetchData: vi.fn(
+      async () =>
+        new Promise((resolve) => {
+          resolve(products)
+        })
+    ),
   }
 })
 
 vi.mock('../Product.jsx', { spy: true })
 
 describe('COMPONENT APP', () => {
-  it('Heading', () => {
-    const { getByRole } = render(<App />)
+  it('Heading', async () => {
+    const { findByRole } = render(<App />)
 
-    const heading = getByRole('heading', { level: 1 })
+    const heading = await findByRole('heading', { level: 1 })
     expect(heading.textContent).toBe('Shopping Cart')
   })
 
   it('Categories', async () => {
     const user = userEvent.setup()
-    const { getByRole, getAllByTitle } = render(<App />)
+    const { findAllByTitle, getByRole, getAllByTitle } = render(<App />)
 
-    expect(getAllByTitle(/category/i).length).toBe(4)
+    const items = await findAllByTitle(/category/i)
+    expect(items.length).toBe(4)
 
     await user.click(getByRole('checkbox', { name: /Jewelery/ }))
     expect(getAllByTitle(/category/i).length).toBe(1)
@@ -51,16 +57,20 @@ describe('COMPONENT APP', () => {
     expect(getAllByTitle(/category/i).length).toBe(4)
   })
 
-  it('Products Section Heading', () => {
+  it('Products Section Heading', async () => {
     const { getByTestId } = render(<App />)
     const container = getByTestId('products-container')
-    expect(getByRole(container, 'heading', { level: 2 }).textContent).toBe(
-      'Products'
-    )
+    await waitFor(() => {
+      expect(getByRole(container, 'heading', { level: 2 }).textContent).toBe(
+        'Products'
+      )
+    })
   })
 
-  it('Passes Correct Props to Product Component', () => {
-    const { getByTestId } = render(<App />)
+  it('Passes Correct Props to Product Component', async () => {
+    const { findByText } = render(<App />)
+
+    await findByText(/electronics/i)
 
     products.forEach((product, i) => {
       expect(Product).toHaveBeenNthCalledWith(
