@@ -86,15 +86,13 @@ describe('COMPONENT APP', () => {
   })
 
   it('Loading Screen', async () => {
-    const { getAllByAltText, getAllByTitle, getByTestId, getAllByTestId } =
-      render(<App />)
+    const { getAllByAltText, findAllByTitle, getByTestId } = render(<App />)
 
     const loadingScreen = getByTestId('loading-screen')
     expect(loadingScreen).toBeInTheDocument()
-    await waitFor(() => {
-      getAllByTitle(/category/i)
-      expect(loadingScreen).toBeInTheDocument()
-    })
+
+    await findAllByTitle(/category/i)
+    expect(loadingScreen).toBeInTheDocument()
 
     const images = getAllByAltText('product image')
     expect(loadingScreen).toBeInTheDocument()
