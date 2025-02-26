@@ -5,7 +5,7 @@ const Categories = ({ add, remove }) => {
   }
 
   return (
-    <div>
+    <div data-testid="categories-component">
       <span>Categories</span>
       <div>
         <label>

@@ -1,4 +1,5 @@
 import App from '../App.jsx'
+import Product from '../Product.jsx'
 import { describe, it, expect } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
 import {
@@ -9,7 +10,6 @@ import {
   fireEvent,
 } from '@testing-library/react'
 import { fetchData } from '../../ShoppingCart-Core/api.js'
-import Product from '../Product.jsx'
 
 afterEach(() => {
   cleanup()

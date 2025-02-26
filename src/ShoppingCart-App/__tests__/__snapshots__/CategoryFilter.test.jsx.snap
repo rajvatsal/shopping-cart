@@ -1,0 +1,37 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CATEGORY FILTER > Structure 1`] = `
+<div
+  data-testid="categories-component"
+>
+  <span>
+    Categories
+  </span>
+  <div>
+    <label>
+      <input
+        type="checkbox"
+      />
+      Jewelery
+    </label>
+    <label>
+      <input
+        type="checkbox"
+      />
+      Electronics
+    </label>
+    <label>
+      <input
+        type="checkbox"
+      />
+      Men's Clothing
+    </label>
+    <label>
+      <input
+        type="checkbox"
+      />
+      Women's Clothing
+    </label>
+  </div>
+</div>
+`;
