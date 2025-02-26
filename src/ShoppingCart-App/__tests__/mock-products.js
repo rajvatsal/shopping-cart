@@ -5,7 +5,7 @@ const products = [
 		price: 500,
 		description: "cool skateboard",
 		category: "electronics",
-		image: "something",
+		image: "image-url",
 		rating: 5,
 	},
 	{
@@ -14,7 +14,7 @@ const products = [
 		price: 500,
 		description: "cool skateboard",
 		category: "jewelery",
-		image: "something",
+		image: "image-url",
 		rating: 5,
 	},
 	{
@@ -23,7 +23,7 @@ const products = [
 		price: 500,
 		description: "cool skateboard",
 		category: "men's clothing",
-		image: "something",
+		image: "image-url",
 		rating: 5,
 	},
 	{
@@ -32,7 +32,7 @@ const products = [
 		price: 500,
 		description: "cool skateboard",
 		category: "women's clothing",
-		image: "something",
+		image: "image-url",
 		rating: 5,
 	},
 ];

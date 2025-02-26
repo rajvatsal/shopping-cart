@@ -1,12 +1,19 @@
 import './App.scss'
 import { fetchData } from '../ShoppingCart-Core/api.js'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Product from './Product.jsx'
 import Categories from './CategoryFilter.jsx'
 
 function App() {
   const [filter, setFilter] = useState([])
   const [products, setProducts] = useState([])
+  const [loadingState, setLoadingState] = useState(true)
+
+  const loadedImageCount = useRef(0)
+
+  const onLoad = (e) => {
+    if (++loadedImageCount.current >= products.length) setLoadingState(false)
+  }
 
   const addFilter = (newFilter) => {
     setFilter([...filter, newFilter])
@@ -37,12 +44,17 @@ function App() {
 
             return (
               <li key={product.id}>
-                <Product product={product} />
+                <Product product={product} onImageLoad={onLoad} />
               </li>
             )
           })}
         </ul>
       </section>
+      {loadingState === true ? (
+        <div data-testid="loading-screen">
+          <p>Loading...</p>
+        </div>
+      ) : null}
     </div>
   )
 }
