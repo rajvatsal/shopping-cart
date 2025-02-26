@@ -1,0 +1,26 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Product Component > DOM Structure 1`] = `
+<div>
+  <div
+    title="name"
+  >
+    skateboard
+  </div>
+  <div
+    title="description"
+  >
+    cool skateboard
+  </div>
+  <div
+    title="category"
+  >
+    electronics
+  </div>
+  <img
+    alt="product image"
+    src="image-url"
+  />
+  <div />
+</div>
+`;
