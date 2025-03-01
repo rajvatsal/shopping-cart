@@ -1,3 +1,5 @@
+import { object, func } from 'prop-types'
+
 const Product = ({ product, onImageLoad, toggleProduct }) => {
   return (
     <div key={product.id}>
@@ -11,10 +13,16 @@ const Product = ({ product, onImageLoad, toggleProduct }) => {
           toggleProduct(product.id)
         }}
       >
-        Add to Cart
+        {product.isInCart ? 'remove' : 'Add to Cart'}
       </button>
     </div>
   )
+}
+
+Product.propTypes = {
+  product: object.isRequired,
+  onImageLoad: func.isRequied,
+  toggleProduct: func.isRequired,
 }
 
 export default Product

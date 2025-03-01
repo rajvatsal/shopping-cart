@@ -23,6 +23,19 @@ function App() {
     setFilter(filter.filter((fl) => fl !== oldFilter))
   }
 
+  const updateCart = (id) => {
+    id = Number.parseInt(id)
+    const firstElement = cart.find((product) => product.id === id)
+    const product = products.find((product) => product.id === id)
+    if (firstElement === undefined) {
+      setCart([...cart, product])
+      product.isInCart = true
+    } else {
+      setCart(cart.filter((product) => product.id !== id))
+      product.isInCart = false
+    }
+  }
+
   useEffect(() => {
     const getProducts = async () => {
       const products = await fetchData()
@@ -32,19 +45,11 @@ function App() {
     getProducts()
   }, [])
 
-  const updateCart = (id) => {
-    id = Number.parseInt(id)
-    const firstElement = cart.find((product) => product.id === id)
-    if (firstElement === undefined) {
-      setCart([...cart, products.find((product) => product.id === id)])
-    } else {
-      setCart(cart.filter((product) => product.id !== id))
-    }
-  }
-
   return (
     <div>
-      <div data-testid="cartCounter">{cart.length}</div>
+      <header>
+        <div data-testid="cart-counter">{cart.length}</div>
+      </header>
       <h1>Shopping Cart</h1>
       <Categories add={addFilter} remove={removeFilter} />
       <section data-testid="products-container">

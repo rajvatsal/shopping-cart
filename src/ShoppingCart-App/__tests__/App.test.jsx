@@ -8,6 +8,7 @@ import {
   waitFor,
   cleanup,
   fireEvent,
+  getByTestId,
 } from '@testing-library/react'
 
 afterEach(() => {
@@ -110,23 +111,43 @@ describe('COMPONENT APP', () => {
     const buttons = await opts.findAllByRole('button', { name: 'Add to Cart' })
     buttons.forEach((btn) => expect(btn).toBeInTheDocument())
 
-    const cart = opts.getByTestId('cartCounter')
+    const cart = opts.getByTestId('cart-counter')
 
+    expect(buttons[0].textContent).toMatch(/add to cart/i)
     await user.click(buttons[0])
     expect(cart.textContent).toBe('1')
+    expect(buttons[0].textContent).toMatch(/remove/i)
 
     await user.click(buttons[0])
     expect(cart.textContent).toBe('0')
+    expect(buttons[0].textContent).toMatch(/add to cart/i)
 
+    expect(buttons[2].textContent).toMatch(/add to cart/i)
+    expect(buttons[3].textContent).toMatch(/add to cart/i)
     await user.click(buttons[2])
     await user.click(buttons[3])
     expect(cart.textContent).toBe('2')
+    expect(buttons[2].textContent).toMatch(/remove/i)
+    expect(buttons[3].textContent).toMatch(/remove/i)
 
     await user.click(buttons[2])
-    await user.click(buttons[4])
-    expect(cart.textContent).toBe('2')
+    await user.click(buttons[3])
+    expect(cart.textContent).toBe('0')
+    expect(buttons[2].textContent).toMatch(/add to cart/i)
+    expect(buttons[3].textContent).toMatch(/add to cart/i)
 
+    expect(buttons[1].textContent).toMatch(/add to cart/i)
     await user.click(buttons[1])
-    expect(cart.textContent).toBe('3')
+    expect(cart.textContent).toBe('1')
+    expect(buttons[1].textContent).toMatch(/remove/i)
+  })
+
+  it('Header', async () => {
+    const opts = render(<App />)
+
+    await opts.findAllByTitle(/category/i)
+    const header = opts.getByRole('banner')
+    expect(header).toBeInTheDocument()
+    expect(getByTestId(header, /cart-counter/i)).toBeInTheDocument()
   })
 })
