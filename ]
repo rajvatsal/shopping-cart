@@ -32,19 +32,23 @@ function App() {
     getProducts()
   }, [])
 
-  const updateCart = (id) => {
-    id = Number.parseInt(id)
-    const firstElement = cart.find((product) => product.id === id)
-    if (firstElement === undefined) {
-      setCart([...cart, products.find((product) => product.id === id)])
+  const updateCart = (id, method = 'add') => {
+    if (method == 'add') {
+      setCart([
+        ...cart,
+        Object.assign(
+          {},
+          products.find((product) => product.id === id)
+        ),
+      ])
     } else {
-      setCart(cart.filter((product) => product.id !== id))
+      setCart(products.filter((id) => products.id !== id))
     }
   }
 
   return (
     <div>
-      <div data-testid="cartCounter">{cart.length}</div>
+      <div data-testid="cartCounter" />
       <h1>Shopping Cart</h1>
       <Categories add={addFilter} remove={removeFilter} />
       <section data-testid="products-container">
@@ -56,11 +60,7 @@ function App() {
 
             return (
               <li key={product.id}>
-                <Product
-                  product={product}
-                  onImageLoad={onLoad}
-                  toggleProduct={updateCart}
-                />
+                <Product product={product} onImageLoad={onLoad} />
               </li>
             )
           })}

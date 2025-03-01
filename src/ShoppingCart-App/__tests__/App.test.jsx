@@ -9,7 +9,6 @@ import {
   cleanup,
   fireEvent,
 } from '@testing-library/react'
-import { fetchData } from '../../ShoppingCart-Core/api.js'
 
 afterEach(() => {
   cleanup()
@@ -52,10 +51,10 @@ describe('COMPONENT APP', () => {
     await user.click(getByRole('checkbox', { name: /Electronics/i }))
     expect(getAllByTitle(/category/i).length).toBe(1)
 
-    await user.click(getByRole('checkbox', { name: /women\'s clothing/i }))
+    await user.click(getByRole('checkbox', { name: /women's clothing/i }))
     expect(getAllByTitle(/category/i).length).toBe(2)
 
-    await user.click(getByRole('checkbox', { name: /^men\'s clothing/i }))
+    await user.click(getByRole('checkbox', { name: /^men's clothing/i }))
     await user.click(getByRole('checkbox', { name: /Electronics/i }))
 
     expect(getAllByTitle(/category/i).length).toBe(4)
@@ -79,7 +78,11 @@ describe('COMPONENT APP', () => {
     products.forEach((product, i) => {
       expect(Product).toHaveBeenNthCalledWith(
         i + 1,
-        { product: products[i], onImageLoad: expect.anything() },
+        {
+          product: products[i],
+          onImageLoad: expect.any(Function),
+          toggleProduct: expect.any(Function),
+        },
         undefined
       )
     })
@@ -98,5 +101,32 @@ describe('COMPONENT APP', () => {
     expect(loadingScreen).toBeInTheDocument()
     images.forEach((image) => fireEvent.load(image))
     expect(loadingScreen).not.toBeInTheDocument()
+  })
+
+  it('Add to Cart Button', async () => {
+    const user = userEvent.setup()
+    const opts = render(<App />)
+
+    const buttons = await opts.findAllByRole('button', { name: 'Add to Cart' })
+    buttons.forEach((btn) => expect(btn).toBeInTheDocument())
+
+    const cart = opts.getByTestId('cartCounter')
+
+    await user.click(buttons[0])
+    expect(cart.textContent).toBe('1')
+
+    await user.click(buttons[0])
+    expect(cart.textContent).toBe('0')
+
+    await user.click(buttons[2])
+    await user.click(buttons[3])
+    expect(cart.textContent).toBe('2')
+
+    await user.click(buttons[2])
+    await user.click(buttons[4])
+    expect(cart.textContent).toBe('2')
+
+    await user.click(buttons[1])
+    expect(cart.textContent).toBe('3')
   })
 })

@@ -22,5 +22,8 @@ exports[`Product Component > DOM Structure 1`] = `
     src="image-url"
   />
   <div />
+  <button>
+    Add to Cart
+  </button>
 </div>
 `;
