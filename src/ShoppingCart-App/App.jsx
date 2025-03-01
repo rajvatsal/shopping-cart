@@ -48,10 +48,10 @@ function App() {
   return (
     <div>
       <header>
+        <h1>Shopping Cart</h1>
         <div data-testid="cart-counter">{cart.length}</div>
+        <Categories add={addFilter} remove={removeFilter} />
       </header>
-      <h1>Shopping Cart</h1>
-      <Categories add={addFilter} remove={removeFilter} />
       <section data-testid="products-container">
         <h2>Products</h2>{' '}
         <ul>
