@@ -3,6 +3,12 @@ import Product from '../Product.jsx'
 import { describe, it, expect } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
 import {
+  createMemoryRouter,
+  RouterProvider,
+  BrowserRouter,
+} from 'react-router-dom'
+import { routes } from '../../routes.jsx'
+import {
   render,
   getByRole,
   waitFor,
@@ -28,17 +34,25 @@ vi.mock('../../ShoppingCart-Core/api.js', () => {
 
 vi.mock('../Product.jsx', { spy: true })
 
+// Setup
+const setup = () => {
+  const router = createMemoryRouter(routes)
+  return {
+    user: userEvent.setup(),
+    ...render(<RouterProvider router={router} />, { wrapper: BrowserRouter }),
+  }
+}
+
 describe('COMPONENT APP', () => {
   it('Heading', async () => {
-    const { findByRole } = render(<App />)
+    const { findByRole } = setup(<App />)
 
     const heading = await findByRole('heading', { level: 1 })
     expect(heading.textContent).toBe('Shopping Cart')
   })
 
   it('Categories', async () => {
-    const user = userEvent.setup()
-    const { findAllByTitle, getByRole, getAllByTitle } = render(<App />)
+    const { user, findAllByTitle, getByRole, getAllByTitle } = setup(<App />)
 
     const items = await findAllByTitle(/category/i)
     expect(items.length).toBe(4)
@@ -62,7 +76,7 @@ describe('COMPONENT APP', () => {
   })
 
   it('Products Section Heading', async () => {
-    const { getByTestId } = render(<App />)
+    const { getByTestId } = setup(<App />)
     const container = getByTestId('products-container')
     await waitFor(() => {
       expect(getByRole(container, 'heading', { level: 2 }).textContent).toBe(
@@ -72,7 +86,7 @@ describe('COMPONENT APP', () => {
   })
 
   it('Passes Correct Props to Product Component', async () => {
-    const { findAllByTitle } = render(<App />)
+    const { findAllByTitle } = setup(<App />)
 
     await findAllByTitle(/category/i)
 
@@ -90,7 +104,7 @@ describe('COMPONENT APP', () => {
   })
 
   it('Loading Screen', async () => {
-    const { getAllByAltText, findAllByTitle, getByTestId } = render(<App />)
+    const { getAllByAltText, findAllByTitle, getByTestId } = setup(<App />)
 
     const loadingScreen = getByTestId('loading-screen')
     expect(loadingScreen).toBeInTheDocument()
@@ -105,8 +119,8 @@ describe('COMPONENT APP', () => {
   })
 
   it('Add to Cart Button', async () => {
-    const user = userEvent.setup()
-    const opts = render(<App />)
+    const opts = setup(<App />)
+    const user = opts.user
 
     const buttons = await opts.findAllByRole('button', { name: 'Add to Cart' })
     buttons.forEach((btn) => expect(btn).toBeInTheDocument())
@@ -143,7 +157,7 @@ describe('COMPONENT APP', () => {
   })
 
   it('Header', async () => {
-    const opts = render(<App />)
+    const opts = setup(<App />)
 
     await opts.findAllByTitle(/category/i)
     const header = opts.getByRole('banner')

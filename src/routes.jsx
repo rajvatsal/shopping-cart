@@ -1,8 +1,17 @@
-import App from './ShoppingCart-App//App.jsx'
+import CartPage from './ShoppingCart-App/pages/CartPage.jsx'
+import App from './ShoppingCart-App/App.jsx'
 
-export const routes = [
+const routes = [
   {
     path: '/',
     element: <App />,
+    children: [
+      {
+        path: 'cart-page',
+        element: <CartPage />,
+      },
+    ],
   },
 ]
+
+export { routes }
