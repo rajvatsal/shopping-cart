@@ -38,6 +38,7 @@ describe('Cart Page', () => {
       findAllByTitle,
       user,
       findByRole,
+      getByRole,
       router,
       queryByRole,
       queryByTestId,
@@ -45,6 +46,7 @@ describe('Cart Page', () => {
     } = setup()
 
     await findAllByTitle('category')
+    expect(getByRole('heading', { name: /cart page/i })).toBeInTheDocument()
     debug()
   })
 })
