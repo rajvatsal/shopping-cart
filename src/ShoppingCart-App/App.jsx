@@ -1,7 +1,7 @@
 import './App.scss'
 import { fetchData } from '../ShoppingCart-Core/api.js'
 import { useState, useEffect, useRef } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router'
 import Product from './Product.jsx'
 import Categories from './CategoryFilter.jsx'
 
@@ -55,7 +55,7 @@ function App() {
         </Link>
         <Categories add={addFilter} remove={removeFilter} />
       </header>
-      <Outlet />
+      <Outlet context={{ products }} />
       <section data-testid="products-container">
         <h2>Products</h2>{' '}
         <ul>

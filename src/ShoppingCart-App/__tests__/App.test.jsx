@@ -1,12 +1,8 @@
 import App from '../App.jsx'
 import Product from '../Product.jsx'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi, afterEach } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
-import {
-  createMemoryRouter,
-  RouterProvider,
-  BrowserRouter,
-} from 'react-router-dom'
+import { createMemoryRouter, RouterProvider } from 'react-router'
 import { routes } from '../../routes.jsx'
 import {
   render,
@@ -35,11 +31,11 @@ vi.mock('../../ShoppingCart-Core/api.js', () => {
 vi.mock('../Product.jsx', { spy: true })
 
 // Setup
+const router = createMemoryRouter(routes)
 const setup = () => {
-  const router = createMemoryRouter(routes)
   return {
     user: userEvent.setup(),
-    ...render(<RouterProvider router={router} />, { wrapper: BrowserRouter }),
+    ...render(<RouterProvider router={router} />),
   }
 }
 

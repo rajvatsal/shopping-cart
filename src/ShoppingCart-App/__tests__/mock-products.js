@@ -10,7 +10,7 @@ const products = [
 	},
 	{
 		id: 2,
-		title: "skateboard",
+		title: "boat",
 		price: 500,
 		description: "cool skateboard",
 		category: "jewelery",
@@ -19,7 +19,7 @@ const products = [
 	},
 	{
 		id: 3,
-		title: "skateboard",
+		title: "car",
 		price: 500,
 		description: "cool skateboard",
 		category: "men's clothing",
@@ -28,7 +28,7 @@ const products = [
 	},
 	{
 		id: 4,
-		title: "skateboard",
+		title: "bike",
 		price: 500,
 		description: "cool skateboard",
 		category: "women's clothing",

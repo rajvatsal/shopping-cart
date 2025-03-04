@@ -1,4 +1,4 @@
-import CartPage from './ShoppingCart-App/pages/CartPage.jsx'
+import CartPage from './ShoppingCart-App/cart-page/Page.jsx'
 import App from './ShoppingCart-App/App.jsx'
 
 const routes = [
