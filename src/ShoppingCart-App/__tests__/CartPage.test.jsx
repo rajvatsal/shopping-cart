@@ -35,6 +35,18 @@ const setup = () => {
 }
 
 describe('Cart Page', () => {
+  it('Cart Page Loads correctly', async () => {
+    const { user, getByRole, findAllByTitle, getByTestId } = setup()
+
+    await findAllByTitle('category')
+
+    const products = getByTestId('products-container')
+    expect(products).toBeInTheDocument()
+    await user.click(getByRole('link', { name: /cart page/i }))
+    getByTestId('cart-container')
+    expect(products).not.toBeInTheDocument()
+  })
+
   it('Heading', async () => {
     const { findAllByTitle, getByRole, user } = setup()
 
