@@ -27,6 +27,7 @@ function App() {
     id = Number.parseInt(id)
     const firstElement = cart.find((product) => product.id === id)
     const product = products.find((product) => product.id === id)
+
     if (firstElement === undefined) {
       setCart([...cart, product])
       product.isInCart = true
