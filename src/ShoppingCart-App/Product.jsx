@@ -1,6 +1,6 @@
-import { object, func } from 'prop-types'
+import { object, func, bool } from 'prop-types'
 
-const Product = ({ product, onImageLoad, toggleProduct }) => {
+const Product = ({ product, onImageLoad, toggleProduct, isInCart }) => {
   return (
     <div key={product.id}>
       <div title="name">{product.title}</div>
@@ -13,7 +13,7 @@ const Product = ({ product, onImageLoad, toggleProduct }) => {
           toggleProduct(product.id)
         }}
       >
-        {product.isInCart ? 'remove' : 'Add to Cart'}
+        {isInCart ? 'remove' : 'Add to Cart'}
       </button>
     </div>
   )
@@ -23,6 +23,7 @@ Product.propTypes = {
   product: object.isRequired,
   onImageLoad: func.isRequied,
   toggleProduct: func.isRequired,
+  isInCart: bool.isRequired,
 }
 
 export default Product

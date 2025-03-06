@@ -14,18 +14,27 @@ function App() {
     if (++loadedImageCount.current >= products.length) setLoadingState(false)
   }
 
-  const updateCart = (id) => {
+  const updateCart = (id, count = 1) => {
     id = Number.parseInt(id)
-    const firstElement = cart.find((product) => product.id === id)
-    const product = products.find((product) => product.id === id)
+    count = Number.parseInt(count)
+    const newCart = []
+    let isInCart = false
 
-    if (firstElement === undefined) {
-      setCart([...cart, product])
-      product.isInCart = true
-    } else {
-      setCart(cart.filter((product) => product.id !== id))
-      product.isInCart = false
+    for (const item of cart) {
+      if (item[0] === id) {
+        isInCart = true
+        continue
+      }
+      newCart.push([item[0], item[1]])
     }
+
+    if (isInCart) {
+      setCart(newCart)
+      return
+    }
+
+    newCart.push([id, count])
+    setCart(newCart)
   }
 
   useEffect(() => {
