@@ -162,17 +162,5 @@ describe('COMPONENT APP', () => {
     expect(
       getByRole(header, 'heading', { name: /shopping cart/i })
     ).toBeInTheDocument()
-    expect(
-      getByRole(header, 'checkbox', { name: /jewelery/i })
-    ).toBeInTheDocument()
-    expect(
-      getByRole(header, 'checkbox', { name: /electronics/i })
-    ).toBeInTheDocument()
-    expect(
-      getByRole(header, 'checkbox', { name: /^men's clothing/i })
-    ).toBeInTheDocument()
-    expect(
-      getByRole(header, 'checkbox', { name: /women's clothing/i })
-    ).toBeInTheDocument()
   })
 })

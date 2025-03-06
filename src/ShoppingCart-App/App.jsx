@@ -1,11 +1,9 @@
 import './App.scss'
-import Categories from './CategoryFilter.jsx'
 import { fetchData } from '../ShoppingCart-Core/api.js'
 import { useState, useEffect, useRef } from 'react'
 import { Link, Outlet } from 'react-router'
 
 function App() {
-  const [filter, setFilter] = useState([])
   const [products, setProducts] = useState([])
   const [loadingState, setLoadingState] = useState(true)
   const [cart, setCart] = useState([])
@@ -14,13 +12,6 @@ function App() {
 
   const onImageLoad = () => {
     if (++loadedImageCount.current >= products.length) setLoadingState(false)
-  }
-
-  const addFilter = (newFilter) => {
-    setFilter([...filter, newFilter])
-  }
-  const removeFilter = (oldFilter) => {
-    setFilter(filter.filter((fl) => fl !== oldFilter))
   }
 
   const updateCart = (id) => {
@@ -53,9 +44,8 @@ function App() {
         <Link to="cart-page" aria-label="cart page">
           <div data-testid="cart-counter">{cart.length}</div>
         </Link>
-        <Categories add={addFilter} remove={removeFilter} />
       </header>
-      <Outlet context={{ products, updateCart, onImageLoad, filter }} />
+      <Outlet context={{ cart, products, updateCart, onImageLoad }} />
       {loadingState === true ? (
         <div data-testid="loading-screen">
           <p>Loading...</p>

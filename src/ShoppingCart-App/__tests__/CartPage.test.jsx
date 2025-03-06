@@ -56,28 +56,38 @@ describe('Cart Page', () => {
   })
 
   it('Total Price', async () => {
-    const { user, getByRole, findAllByTitle } = setup()
+    const { user, findAllByTitle } = setup()
     await findAllByTitle('category')
     await user.click(screen.getByRole('link', { name: 'cart page' }))
-
-    expect(
-      getByRole('generic', { name: 'total price of cart' }).textContent
-    ).toBe(`$${products.reduce((acc, p) => acc + p.price, 0)}`)
   })
 
-  it('Items List', async () => {
-    const { findAllByTitle, getAllByTestId, user } = setup()
+  it('Cart is initially empty', async () => {
+    const { user, findAllByTitle, queryAllByTestId, getByRole } = setup()
     await findAllByTitle('category')
     await user.click(screen.getByRole('link', { name: 'cart page' }))
 
-    expect(getAllByTestId('product-cart-page').length).toBe(4)
-    products.forEach((product, i) => {
-      expect(Product).toHaveBeenNthCalledWith(
-        i + 1,
-        { details: products[i] },
-        undefined
-      )
-    })
+    expect(queryAllByTestId('product-cart-page').length).toBe(0)
+    expect(Product).not.toHaveBeenCalled()
+    expect(
+      getByRole('generic', { name: 'total price of cart' }).textContent
+    ).toBe(`$0`)
+  })
+
+  it('Cart is functional', async () => {
+    const { user, findAllByTitle, getAllByRole, getByRole, queryAllByTestId } =
+      setup()
+    await findAllByTitle('category')
+
+    const btns = getAllByRole('button', { name: /add to cart/i })
+    await user.click(btns[0])
+    await user.click(btns[2])
+    await user.click(getByRole('link', { name: 'cart page' }))
+
+    expect(queryAllByTestId('product-cart-page').length).toBe(2)
+    expect(Product).toHaveBeenCalledTimes(2)
+    expect(
+      getByRole('generic', { name: 'total price of cart' }).textContent
+    ).toBe(`$${products[0].price + products[2].price}`)
   })
 
   it('Product', () => {
