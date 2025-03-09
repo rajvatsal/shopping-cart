@@ -1,18 +1,26 @@
 import Product from '../Product.jsx'
 import { products } from './mock-products.js'
-import { render, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
+import { describe, it, vi, expect } from 'vitest'
 
-describe('Product Component', () => {
-  it('DOM Structure', () => {
-    const renderer = render(<Product product={products[0]} />)
+describe('Product Index Page', () => {
+  it('Snapshot', () => {
+    const renderer = render(
+      <Product product={products[0]} cart={[]} updateProductCount={vi.fn()} />
+    )
     expect(renderer.container.firstChild).toMatchSnapshot()
   })
 
   it('Image Load Event', () => {
     const imageLoad = vi.fn()
     const { getByAltText } = render(
-      <Product product={products[0]} onImageLoad={imageLoad} />
+      <Product
+        product={products[0]}
+        onImageLoad={imageLoad}
+        updateProductCount={vi.fn()}
+        cart={[]}
+      />
     )
 
     expect(imageLoad).toBeCalledTimes(0)
@@ -22,11 +30,16 @@ describe('Product Component', () => {
     expect(imageLoad).toBeCalledTimes(1)
   })
 
-  it('Cart', async () => {
+  it('Toggle cart item', async () => {
     const toggleItemInCart = vi.fn()
     const user = userEvent.setup()
     const { getByRole } = render(
-      <Product toggleProduct={toggleItemInCart} product={products[0]} />
+      <Product
+        toggleProduct={toggleItemInCart}
+        product={products[0]}
+        cart={[]}
+        updateProductCount={vi.fn()}
+      />
     )
     const button = getByRole('button', { name: /add to cart/i })
 

@@ -14,7 +14,29 @@ function App() {
     if (++loadedImageCount.current >= products.length) setLoadingState(false)
   }
 
-  const updateCart = (id, count = 1) => {
+  const updateProductCount = (id, count) => {
+    let newCart = []
+    let foundInCart = false
+
+    if (!count) {
+      newCart = cart.filter((arr) => arr[0] !== id)
+    } else {
+      for (let product of cart) {
+        if (product[0] === id) {
+          foundInCart = true
+          newCart.push([id, count])
+        } else newCart.push(product)
+      }
+
+      if (!foundInCart) {
+        newCart.push([id, count])
+      }
+    }
+
+    setCart(newCart)
+  }
+
+  const toggleProductInCart = (id, count = 1) => {
     id = Number.parseInt(id)
     count = Number.parseInt(count)
     const newCart = []
@@ -54,7 +76,15 @@ function App() {
           <div data-testid="cart-counter">{cart.length}</div>
         </Link>
       </header>
-      <Outlet context={{ cart, products, updateCart, onImageLoad }} />
+      <Outlet
+        context={{
+          cart,
+          products,
+          toggleProductInCart,
+          onImageLoad,
+          updateProductCount,
+        }}
+      />
       {loadingState === true ? (
         <div data-testid="loading-screen">
           <p>Loading...</p>

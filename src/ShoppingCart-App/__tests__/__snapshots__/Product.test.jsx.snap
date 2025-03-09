@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Product Component > DOM Structure 1`] = `
+exports[`Product Index Page > Snapshot 1`] = `
 <div>
   <div
     title="name"
@@ -22,6 +22,17 @@ exports[`Product Component > DOM Structure 1`] = `
     src="image-url"
   />
   <div />
+  <button>
+    -
+  </button>
+  <input
+    min="0"
+    type="number"
+    value="0"
+  />
+  <button>
+    +
+  </button>
   <button>
     Add to Cart
   </button>

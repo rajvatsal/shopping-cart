@@ -1,35 +1,47 @@
 import { func, number } from 'prop-types'
-import { useState } from 'react'
 
-const Counter = ({ initialValue = 1, addFn, subFn }) => {
-  const [value, setValue] = useState(initialValue)
+const Counter = ({ value = 1, id, updateValue }) => {
+  const addFn = () => {
+    updateValue(id, value + 1)
+  }
+
+  const subFn = () => {
+    updateValue(id, value - 1)
+  }
+
   return (
     <>
       <button
         onClick={() => {
-          setValue(value + 1)
-          addFn()
-        }}
-      >
-        +
-      </button>
-      <input type="number" value={value} />
-      <button
-        onClick={() => {
-          setValue(value - 1)
+          if (value === 0) return
           subFn()
         }}
       >
         -
+      </button>
+      <input
+        type="number"
+        value={value}
+        onChange={(e) => {
+          updateValue(id, Number.parseInt(e.target.value))
+        }}
+        min="0"
+      />
+      <button
+        onClick={() => {
+          addFn()
+        }}
+      >
+        +
       </button>
     </>
   )
 }
 
 Counter.propTypes = {
-  initialValue: number,
-  addFn: func,
-  subFn: func,
+  value: number,
+  id: number,
+  updateValue: func,
 }
 
 export default Counter

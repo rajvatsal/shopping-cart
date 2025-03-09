@@ -5,7 +5,13 @@ import { useOutletContext } from 'react-router'
 
 const IndexPage = () => {
   const [filter, setFilter] = useState([])
-  const { products, onImageLoad, updateCart, cart } = useOutletContext()
+  const {
+    products,
+    onImageLoad,
+    toggleProductInCart,
+    cart,
+    updateProductCount,
+  } = useOutletContext()
 
   const addFilter = (newFilter) => {
     setFilter([...filter, newFilter])
@@ -28,8 +34,9 @@ const IndexPage = () => {
               <Product
                 product={product}
                 onImageLoad={onImageLoad}
-                toggleProduct={updateCart}
-                isInCart={cart.find((item) => item[0] === product.id)}
+                toggleProduct={toggleProductInCart}
+                cart={cart}
+                updateProductCount={updateProductCount}
               />
             </li>
           )

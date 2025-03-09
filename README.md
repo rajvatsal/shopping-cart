@@ -1,3 +1,1 @@
-- ~~refactor cart state to only store id and count and filter products with that info~~
-- feat product counter
 - feat product page
