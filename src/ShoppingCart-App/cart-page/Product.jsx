@@ -13,6 +13,13 @@ const Product = ({ details }) => {
         updateValue={updateProductCount}
         value={details.count}
       />
+      <button
+        onClick={() => {
+          updateProductCount(details.id, 0)
+        }}
+      >
+        remove
+      </button>
     </div>
   )
 }

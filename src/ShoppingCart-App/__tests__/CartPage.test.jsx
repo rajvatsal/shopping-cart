@@ -1,7 +1,7 @@
 import Product from '../cart-page/Product.jsx'
 import Counter from '../Counter.jsx'
 import { vi, describe, it, expect, afterEach } from 'vitest'
-import { render, screen, cleanup } from '@testing-library/react'
+import { render, screen, cleanup, act } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import { routes } from '../../routes.jsx'
 import { RouterProvider, createMemoryRouter } from 'react-router'
@@ -122,6 +122,9 @@ describe('Cart Page', () => {
         <button>
           +
         </button>
+        <button>
+          remove
+        </button>
       </div>
     `)
   })
@@ -172,5 +175,29 @@ describe('Cart Page', () => {
     expect(
       screen.getByRole('generic', { name: 'total price of cart' }).textContent
     ).toBe(`$${products[0].price * 2 + products[1].price + products[3].price}`)
+  })
+
+  it('Remove button works', async () => {
+    const { user, router } = setup()
+
+    let elements = await screen.findAllByRole('button', { name: '+' })
+    await user.click(elements[2])
+
+    act(() => {
+      router.navigate('cart-page')
+    })
+
+    const price = screen.getByRole('generic', { name: /price/i })
+
+    expect(price.textContent).toBe(`$${products[2].price}`)
+    expect(screen.getAllByTestId('product-cart-page').length).toBe(1)
+
+    elements = screen.getAllByRole('button', { name: /remove/i })
+    await user.click(elements[0])
+
+    expect(screen.queryAllByTestId('product-cart-page').length).toBe(0)
+    expect(screen.getByRole('generic', { name: /price/i }).textContent).toBe(
+      `$0`
+    )
   })
 })

@@ -1,1 +1,1 @@
-- feat product page
+- feat single product page
