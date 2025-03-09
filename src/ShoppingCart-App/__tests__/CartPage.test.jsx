@@ -102,29 +102,35 @@ describe('Cart Page', () => {
       <div
         data-testid="product-cart-page"
       >
-        <h2>
-          skateboard
-        </h2>
-        <h2>
-          $
-          500
-        </h2>
         <div>
+          <h2>
+            skateboard
+          </h2>
+          <h2>
+            $
+            500
+          </h2>
+          <div>
+            <button>
+              -
+            </button>
+            <input
+              min="0"
+              type="number"
+              value="1"
+            />
+            <button>
+              +
+            </button>
+          </div>
           <button>
-            -
-          </button>
-          <input
-            min="0"
-            type="number"
-            value="1"
-          />
-          <button>
-            +
+            remove
           </button>
         </div>
-        <button>
-          remove
-        </button>
+        <img
+          alt="product image"
+          src="image-url"
+        />
       </div>
     `)
   })

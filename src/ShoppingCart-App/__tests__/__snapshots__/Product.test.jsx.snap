@@ -17,6 +17,10 @@ exports[`Product Index Page > Snapshot 1`] = `
   >
     Add to Cart
   </button>
+  <h3>
+    $
+    500
+  </h3>
   <div
     class="_product__ratingCategoryContainer_03d30d"
   >

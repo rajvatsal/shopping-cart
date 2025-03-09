@@ -6,6 +6,7 @@ import { routes } from '../../routes.jsx'
 import {
   render,
   prettyDOM,
+  waitForElementToBeRemoved,
   act,
   screen,
   getByRole,
@@ -18,6 +19,7 @@ import {
 afterEach(() => {
   cleanup()
   vi.clearAllMocks()
+  vi.useRealTimers()
 })
 
 const { products } = await vi.hoisted(
@@ -128,8 +130,12 @@ describe('App', () => {
 
     expect(loadingScreen).toBeInTheDocument()
 
+    vi.useFakeTimers()
     images.forEach((image) => fireEvent.load(image))
 
+    act(() => {
+      vi.advanceTimersByTime(500)
+    })
     expect(loadingScreen).not.toBeInTheDocument()
   })
 
