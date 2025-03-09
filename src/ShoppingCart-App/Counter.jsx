@@ -1,3 +1,8 @@
+import {
+  counter,
+  counter__addBtn,
+  counter__subBtn,
+} from './Counter.module.scss'
 import { func, number } from 'prop-types'
 
 const Counter = ({ value = 1, id, updateValue }) => {
@@ -10,8 +15,9 @@ const Counter = ({ value = 1, id, updateValue }) => {
   }
 
   return (
-    <>
+    <div className={counter}>
       <button
+        className={counter__subBtn}
         onClick={() => {
           if (value === 0) return
           subFn()
@@ -28,13 +34,14 @@ const Counter = ({ value = 1, id, updateValue }) => {
         min="0"
       />
       <button
+        className={counter__addBtn}
         onClick={() => {
           addFn()
         }}
       >
         +
       </button>
-    </>
+    </div>
   )
 }
 

@@ -1,0 +1,33 @@
+.appHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--sp-400) var(--sp-700);
+  position: sticky;
+
+  a {
+    --radius: 40px;
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+    background: var(--clr-primary-400);
+    color: var(--clr-neutral-100);
+    padding: var(--sp-200);
+    border-radius: 30%;
+    height: var(--radius);
+    width: var(--radius);
+  }
+}
+
+.app {
+  padding-bottom: calc(var(--sp-700) * 3);
+}
+
+.loadingScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  background: var(--clr-neutral-100);
+}

@@ -1,3 +1,6 @@
+import { categories } from './CategoryFilter.module.scss'
+import { func, string } from 'prop-types'
+
 const Categories = ({ add, remove }) => {
   const onClick = (item) => (e) => {
     if (e.target.checked === false) remove(item)
@@ -5,8 +8,8 @@ const Categories = ({ add, remove }) => {
   }
 
   return (
-    <div data-testid="categories-component">
-      <span>Categories</span>
+    <div data-testid="categories-component" className={categories}>
+      <h3>Categories</h3>
       <div>
         <label>
           <input
@@ -43,6 +46,12 @@ const Categories = ({ add, remove }) => {
       </div>
     </div>
   )
+}
+
+Categories.propTypes = {
+  add: func.isRequired,
+  remove: func.isRequired,
+  className: string,
 }
 
 export default Categories

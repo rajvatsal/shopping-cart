@@ -1,0 +1,29 @@
+.product {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  img {
+    height: 120px;
+    object-fit: cover;
+    margin-left: var(--sp-700);
+  }
+}
+
+.toggleBtn {
+  background: linear-gradient(
+    90deg,
+    var(--clr-primary-400),
+    var(--clr-primary-300)
+  );
+  margin-top: var(--sp-200);
+  color: var(--clr-neutral-100);
+  border: 0;
+  padding: var(--sp-100) var(--sp-300);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--clr-neutral-700);
+    background: var(--clr-neutral-200);
+  }
+}

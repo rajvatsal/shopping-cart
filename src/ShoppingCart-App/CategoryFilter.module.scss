@@ -1,0 +1,14 @@
+.categories {
+  padding-inline: var(--pd-inline);
+  padding-bottom: var(--sp-400);
+
+  label {
+    cursor: pointer;
+    margin-right: var(--sp-200);
+
+    input {
+      accent-color: var(--clr-primary-400);
+      margin-right: var(--sp-100);
+    }
+  }
+}

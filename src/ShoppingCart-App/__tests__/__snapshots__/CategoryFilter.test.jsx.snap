@@ -4,9 +4,9 @@ exports[`CATEGORY FILTER > Structure 1`] = `
 <div
   data-testid="categories-component"
 >
-  <span>
+  <h3>
     Categories
-  </span>
+  </h3>
   <div>
     <label>
       <input

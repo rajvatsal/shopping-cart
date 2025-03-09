@@ -1,1 +1,4 @@
+- feat: styles for index and cart page
 - feat single product page
+- refactor: organize tests and components
+- refactor: design similar to (brooklinen)[https://www.brooklinen.com/]

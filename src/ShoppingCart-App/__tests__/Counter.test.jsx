@@ -45,17 +45,19 @@ describe('Product Counter', () => {
     const element = setup()
     expect(element.container).toMatchInlineSnapshot(`
       <div>
-        <button>
-          -
-        </button>
-        <input
-          min="0"
-          type="number"
-          value="1"
-        />
-        <button>
-          +
-        </button>
+        <div>
+          <button>
+            -
+          </button>
+          <input
+            min="0"
+            type="number"
+            value="1"
+          />
+          <button>
+            +
+          </button>
+        </div>
       </div>
     `)
   })

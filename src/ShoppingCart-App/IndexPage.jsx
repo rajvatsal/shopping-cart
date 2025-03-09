@@ -1,5 +1,10 @@
 import Categories from './CategoryFilter.jsx'
 import Product from './Product.jsx'
+import {
+  indexPage,
+  indexPage__products,
+  indexPage__heading,
+} from './IndexPage.module.scss'
 import { useState } from 'react'
 import { useOutletContext } from 'react-router'
 
@@ -21,10 +26,10 @@ const IndexPage = () => {
   }
 
   return (
-    <section data-testid="products-container">
-      <h2>Products</h2>
+    <section data-testid="products-container" className={indexPage}>
+      <h2 className={indexPage__heading}>Products</h2>
       <Categories add={addFilter} remove={removeFilter} />
-      <ul>
+      <ul className={indexPage__products}>
         {products.map((product) => {
           if (filter.length !== 0 && !filter.includes(product.category))
             return null

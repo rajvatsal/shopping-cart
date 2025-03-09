@@ -1,40 +1,51 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Product Index Page > Snapshot 1`] = `
-<div>
+<div
+  class="_product_03d30d"
+>
+  <div
+    class="_product__imgContainer_03d30d"
+  >
+    <img
+      alt="product image"
+      src="image-url"
+    />
+  </div>
+  <button
+    class="_product__cartBtn_03d30d"
+  >
+    Add to Cart
+  </button>
+  <div
+    class="_product__ratingCategoryContainer_03d30d"
+  >
+    <div
+      title="category"
+    >
+      electronics
+    </div>
+    <div
+      title="rating"
+    />
+  </div>
   <div
     title="name"
   >
     skateboard
   </div>
-  <div
-    title="description"
-  >
-    cool skateboard
+  <div>
+    <button>
+      -
+    </button>
+    <input
+      min="0"
+      type="number"
+      value="0"
+    />
+    <button>
+      +
+    </button>
   </div>
-  <div
-    title="category"
-  >
-    electronics
-  </div>
-  <img
-    alt="product image"
-    src="image-url"
-  />
-  <div />
-  <button>
-    -
-  </button>
-  <input
-    min="0"
-    type="number"
-    value="0"
-  />
-  <button>
-    +
-  </button>
-  <button>
-    Add to Cart
-  </button>
 </div>
 `;

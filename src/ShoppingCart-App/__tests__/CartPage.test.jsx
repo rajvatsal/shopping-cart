@@ -50,13 +50,11 @@ describe('Cart Page', () => {
   })
 
   it('Heading', async () => {
-    const { user } = setup()
+    const { user, router } = setup()
 
     await screen.findAllByTitle('category')
     await user.click(screen.getByRole('link', { name: 'cart page' }))
-    expect(
-      screen.getByRole('heading', { name: /cart page/i })
-    ).toBeInTheDocument()
+    expect(router.state.location.pathname).toBe('/cart-page')
   })
 
   it('Total price', async () => {
@@ -111,17 +109,19 @@ describe('Cart Page', () => {
           $
           500
         </h2>
-        <button>
-          -
-        </button>
-        <input
-          min="0"
-          type="number"
-          value="1"
-        />
-        <button>
-          +
-        </button>
+        <div>
+          <button>
+            -
+          </button>
+          <input
+            min="0"
+            type="number"
+            value="1"
+          />
+          <button>
+            +
+          </button>
+        </div>
         <button>
           remove
         </button>

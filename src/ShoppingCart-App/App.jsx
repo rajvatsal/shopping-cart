@@ -1,4 +1,4 @@
-import './App.scss'
+import { appHeader, app, loadingScreen } from './App.module.scss'
 import { fetchData } from '../ShoppingCart-Core/api.js'
 import { useState, useEffect, useRef } from 'react'
 import { Link, Outlet } from 'react-router'
@@ -11,7 +11,9 @@ function App() {
   const loadedImageCount = useRef(0)
 
   const onImageLoad = () => {
-    if (++loadedImageCount.current >= products.length) setLoadingState(false)
+    if (++loadedImageCount.current >= products.length) {
+      setTimeout(() => setLoadingState(false), 500)
+    }
   }
 
   const updateProductCount = (id, count) => {
@@ -69,8 +71,8 @@ function App() {
   }, [])
 
   return (
-    <div>
-      <header>
+    <div className={app}>
+      <header className={appHeader}>
         <h1>Shopping Cart</h1>
         <Link to="cart-page" aria-label="cart page">
           <div data-testid="cart-counter">{cart.length}</div>
@@ -86,7 +88,7 @@ function App() {
         }}
       />
       {loadingState === true ? (
-        <div data-testid="loading-screen">
+        <div className={loadingScreen} data-testid="loading-screen">
           <p>Loading...</p>
         </div>
       ) : null}

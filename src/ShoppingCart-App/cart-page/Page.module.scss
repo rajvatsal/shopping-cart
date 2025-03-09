@@ -1,0 +1,18 @@
+.page {
+  padding-inline: var(--sp-700);
+  display: flex;
+  justify-content: space-between;
+
+  &__items {
+    margin-bottom: var(--sp-500);
+    list-style: none;
+    padding: 0;
+    flex: 0 0 auto;
+  }
+
+  &__price {
+    font-size: var(--fs-400);
+    padding-left: var(--sp-700);
+    flex: 0 0 auto;
+  }
+}
