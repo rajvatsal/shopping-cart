@@ -83,7 +83,9 @@ function App() {
   return (
     <div className={app}>
       <header className={appHeader}>
-        <h1 className={appHeader__logo}>Shopping Cart</h1>
+        <Link to="/">
+          <h1 className={appHeader__logo}>Shopping Cart</h1>
+        </Link>
         <Link to="cart-page" aria-label="cart page" className={cartLink}>
           <BagOutline className={cartLink__icon} />
           <span data-testid="cart-counter" className={cartLink__count}>

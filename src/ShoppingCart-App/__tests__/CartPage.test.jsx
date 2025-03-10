@@ -145,7 +145,7 @@ describe('Cart Page', () => {
     await user.click(addBtns[1])
     await user.click(addBtns[3])
     Counter.mockClear()
-    await user.click(screen.getByRole('link', /cart page/i))
+    await user.click(screen.getByRole('link', { name: /cart page/i }))
 
     expect(Counter).toHaveBeenCalledTimes(3)
     expect(Counter).toHaveBeenNthCalledWith(

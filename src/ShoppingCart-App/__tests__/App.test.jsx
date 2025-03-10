@@ -292,4 +292,15 @@ describe('App', () => {
 
     expect(elements.length).toBe(0)
   })
+
+  it('Header links to home page', async () => {
+    const { user, router } = setup()
+
+    await screen.findAllByTitle(/category/i)
+    expect(router.state.location.pathname).toBe('/')
+    await user.click(screen.getByRole('link', { name: /cart page/i }))
+    expect(router.state.location.pathname).toBe('/cart-page')
+    await user.click(screen.getByRole('link', { name: 'Shopping Cart' }))
+    expect(router.state.location.pathname).toBe('/')
+  })
 })
