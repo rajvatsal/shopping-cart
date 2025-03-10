@@ -21,7 +21,7 @@ const CartPage = () => {
 
   return (
     <>
-      <SecondaryHero pageName="carts" />
+      <SecondaryHero pageName="cart" />
       <section data-testid="cart-container" className={page}>
         <ul className={page__items}>
           {cartDetails.map((product) => (
