@@ -1,17 +1,6 @@
 .indexPage {
   --pd-inline: var(--sp-700);
 
-  &__heading {
-    --offset-x: 25px;
-    --offset-y: 25px;
-    padding-inline: var(--sp-700);
-    font-size: var(--fs-500);
-    font-style: italic;
-    opacity: 0.3;
-    color: var(--clr-primary-400);
-    transform: translate(var(--offset-x), var(--offset-y));
-  }
-
   &__products {
     padding-inline: var(--pd-inline);
     display: grid;

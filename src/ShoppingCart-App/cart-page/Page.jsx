@@ -1,5 +1,6 @@
-import { page, page__items, page__price } from './Page.module.scss'
+import SecondaryHero from '../SecondaryHero.jsx'
 import Product from './Product.jsx'
+import { page, page__items, page__price } from './Page.module.scss'
 import { useOutletContext } from 'react-router'
 
 const round = (num) => Math.round((num + Number.EPSILON) * 100) / 100
@@ -19,18 +20,21 @@ const CartPage = () => {
   }
 
   return (
-    <section data-testid="cart-container" className={page}>
-      <ul className={page__items}>
-        {cartDetails.map((product) => (
-          <li key={product.id}>
-            <Product details={product} />
-          </li>
-        ))}
-      </ul>
-      <div aria-label="total price of cart" className={page__price}>
-        ${round(cartDetails.reduce((acc, p) => acc + p.price * p.count, 0))}
-      </div>
-    </section>
+    <>
+      <SecondaryHero pageName="carts" />
+      <section data-testid="cart-container" className={page}>
+        <ul className={page__items}>
+          {cartDetails.map((product) => (
+            <li key={product.id}>
+              <Product details={product} />
+            </li>
+          ))}
+        </ul>
+        <div aria-label="total price of cart" className={page__price}>
+          ${round(cartDetails.reduce((acc, p) => acc + p.price * p.count, 0))}
+        </div>
+      </section>
+    </>
   )
 }
 

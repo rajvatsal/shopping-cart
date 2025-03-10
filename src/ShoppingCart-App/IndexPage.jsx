@@ -1,10 +1,7 @@
+import SecondaryHero from './SecondaryHero.jsx'
 import Categories from './CategoryFilter.jsx'
 import Product from './Product.jsx'
-import {
-  indexPage,
-  indexPage__products,
-  indexPage__heading,
-} from './IndexPage.module.scss'
+import { indexPage, indexPage__products } from './IndexPage.module.scss'
 import { useState } from 'react'
 import { useOutletContext } from 'react-router'
 
@@ -27,7 +24,7 @@ const IndexPage = () => {
 
   return (
     <section data-testid="products-container" className={indexPage}>
-      <h2 className={indexPage__heading}>Products</h2>
+      <SecondaryHero pageName="products" />
       <Categories add={addFilter} remove={removeFilter} />
       <ul className={indexPage__products}>
         {products.map((product) => {
