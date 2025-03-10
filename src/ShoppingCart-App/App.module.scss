@@ -7,6 +7,7 @@
   top: 0;
   border-bottom: 1px solid var(--clr-neutral-200);
   background: var(--clr-neutral-100);
+  z-index: 1000;
 
   &__logo {
     text-transform: uppercase;
