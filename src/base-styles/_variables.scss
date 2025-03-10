@@ -1,6 +1,7 @@
 @use 'sass:color';
 
-$clr-primary: purple;
+$red: #002a32;
+$clr-primary: $red;
 $clr-accent: steelblue;
 $clr-valid: green;
 $clr-invalid: red;

@@ -1,4 +1,14 @@
-import { appHeader, app, loadingScreen } from './App.module.scss'
+import Bag from './Icons/Bag.jsx'
+import BagOutline from './Icons/BagOutline.jsx'
+import {
+  appHeader,
+  appHeader__logo,
+  app,
+  loadingScreen,
+  cartLink,
+  cartLink__icon,
+  cartLink__count,
+} from './App.module.scss'
 import { fetchData } from '../ShoppingCart-Core/api.js'
 import { useState, useEffect, useRef } from 'react'
 import { Link, Outlet } from 'react-router'
@@ -73,9 +83,12 @@ function App() {
   return (
     <div className={app}>
       <header className={appHeader}>
-        <h1>Shopping Cart</h1>
-        <Link to="cart-page" aria-label="cart page">
-          <div data-testid="cart-counter">{cart.length}</div>
+        <h1 className={appHeader__logo}>Shopping Cart</h1>
+        <Link to="cart-page" aria-label="cart page" className={cartLink}>
+          <BagOutline className={cartLink__icon} />
+          <span data-testid="cart-counter" className={cartLink__count}>
+            {cart.length}
+          </span>
         </Link>
       </header>
       <Outlet

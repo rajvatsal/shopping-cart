@@ -1,5 +1,8 @@
 # PLAN
 
+- update fonts
+- update header icon and border and top
+
 - change index page design
     - remove add cart and counter from front page
     - change counter style to use `<select>` instead for `<input>`
