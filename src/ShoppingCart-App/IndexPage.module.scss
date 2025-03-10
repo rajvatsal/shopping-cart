@@ -4,8 +4,8 @@
   &__products {
     padding-inline: var(--pd-inline);
     display: grid;
-    grid-template: 1fr / repeat(auto-fill, minmax(200px, 1fr));
-    gap: var(--sp-500);
+    grid-template: 1fr / repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--pd-inline);
     list-style: none;
   }
 }
