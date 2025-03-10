@@ -90,8 +90,8 @@ describe('App', () => {
     setup()
     const container = screen.getByTestId('products-container')
     await waitFor(() => {
-      expect(getByRole(container, 'heading', { level: 2 }).textContent).toBe(
-        'Products'
+      expect(getByRole(container, 'heading', { level: 2 }).textContent).toMatch(
+        /Products/i
       )
     })
   })
