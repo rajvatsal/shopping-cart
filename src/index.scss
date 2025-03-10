@@ -1,9 +1,10 @@
 @import url('./base-styles/main.scss');
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--ff-primary);
   line-height: 1.5;
   font-weight: 400;
+  color: var(--clr-neutral-800);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

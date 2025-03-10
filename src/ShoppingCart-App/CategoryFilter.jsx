@@ -1,4 +1,4 @@
-import { categories } from './CategoryFilter.module.scss'
+import { categories, categories__heading } from './CategoryFilter.module.scss'
 import { func, string } from 'prop-types'
 
 const Categories = ({ add, remove }) => {
@@ -9,7 +9,7 @@ const Categories = ({ add, remove }) => {
 
   return (
     <div data-testid="categories-component" className={categories}>
-      <h3>Categories</h3>
+      <h3 className={categories__heading}>CATEGORIES</h3>
       <div>
         <label>
           <input

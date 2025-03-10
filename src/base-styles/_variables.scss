@@ -1,4 +1,6 @@
 @use 'sass:color';
+@import url('../assets/fira-sans/stylesheet.css');
+@import url('../assets/style-serif/stylesheet.css');
 
 $red: #002a32;
 $clr-primary: $red;
@@ -56,6 +58,8 @@ $clr-warning: orange;
   Font Family
 
   -------------------------------- */
+  --ff-primary: 'Fira Sans', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --ff-accent: 'Style Script', system-ui, Avenir, Helvetica, Arial, sans-serif;
 
   /* --------------------------------
 

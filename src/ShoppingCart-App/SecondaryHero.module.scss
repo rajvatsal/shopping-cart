@@ -3,12 +3,12 @@
 
   &__heading {
     padding-inline: var(--sp-700);
-    font-size: var(--fs-600);
-    font-style: italic;
     opacity: 0.3;
     color: var(--clr-primary-400);
     text-align: center;
     text-transform: capitalize;
-    font-family: var(--ff-accent-400);
+    font-family: var(--ff-accent);
+    font-weight: normal;
+    font-size: var(--fs-700);
   }
 }

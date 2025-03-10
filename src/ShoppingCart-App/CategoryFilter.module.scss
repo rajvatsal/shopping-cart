@@ -2,6 +2,10 @@
   padding-inline: var(--pd-inline);
   padding-bottom: var(--sp-400);
 
+  &__heading {
+    font-size: var(--fs-200);
+  }
+
   label {
     cursor: pointer;
     margin-right: var(--sp-200);
