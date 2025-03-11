@@ -4,6 +4,7 @@ import { func, number, bool } from 'prop-types'
 const Counter = ({ isInCart, value, id, updateValue }) => {
   return (
     <select
+      aria-label="product count"
       className={counter}
       defaultValue={value}
       onChange={(e) => {
