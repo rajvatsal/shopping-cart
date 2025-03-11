@@ -9,6 +9,10 @@
     display: grid;
     place-items: center;
     padding: var(--sp-200);
+
+    img {
+      overflow: hidden;
+    }
   }
 
   [aria-label='product page'] {
