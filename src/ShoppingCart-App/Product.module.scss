@@ -1,6 +1,15 @@
 .product {
   height: 100%;
   position: relative;
+  transition:
+    box-shadow 150ms ease,
+    padding 150ms ease;
+
+  &:hover,
+  &:focus-within {
+    box-shadow: -10px 10px var(--clr-primary-300);
+    padding: var(--sp-400);
+  }
 
   &__imgContainer {
     height: 300px;
@@ -15,35 +24,35 @@
     }
   }
 
-  [aria-label='product page'] {
+  a[aria-label='product page'] {
     text-decoration: none;
     color: inherit;
 
-    &::before {
-      content: 'Get This';
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      color: var(--clr-neutral-100);
-      font-family: var(--ff-accent);
-      background: linear-gradient(
-        rgba(19, 25, 48, 0.95) 40%,
-        var(--clr-primary-400)
-      );
-      opacity: 0;
-      transition:
-        font-size 120ms ease,
-        opacity 80ms ease;
-      z-index: 100;
-      cursor: pointer;
-      font-size: var(--fs-400);
-    }
-
-    &:hover::before {
-      font-size: var(--fs-600);
-      opacity: 1;
-    }
+    /* &::before { */
+    /*   content: 'Get This'; */
+    /*   position: absolute; */
+    /*   inset: 0; */
+    /*   display: grid; */
+    /*   place-items: center; */
+    /*   color: var(--clr-neutral-100); */
+    /*   font-family: var(--ff-accent); */
+    /*   background: linear-gradient( */
+    /*     rgba(19, 25, 48, 0.95) 40%, */
+    /*     var(--clr-primary-400) */
+    /*   ); */
+    /*   opacity: 0; */
+    /*   transition: */
+    /*     font-size 120ms ease, */
+    /*     opacity 80ms ease; */
+    /*   z-index: 100; */
+    /*   cursor: pointer; */
+    /*   font-size: var(--fs-400); */
+    /* } */
+    /**/
+    /* &:hover::before { */
+    /*   font-size: var(--fs-600); */
+    /*   opacity: 1; */
+    /* } */
   }
 
   img {
