@@ -33,6 +33,7 @@ const ProductPage = () => {
         <p className={description}>{product.description}</p>
         <div className={cont_2}>
           <button
+            className="btn--primary"
             onClick={() => {
               toggleProductInCart(productId)
             }}
