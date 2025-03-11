@@ -25,6 +25,7 @@ const Product = ({ details }) => {
             value={details.count}
           />
           <button
+            aria-label="remove"
             className={product__toggleBtn}
             onClick={() => {
               updateProductCount(details.id, 0)
