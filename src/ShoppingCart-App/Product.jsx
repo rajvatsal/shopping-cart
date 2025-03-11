@@ -1,8 +1,10 @@
 import classes from './Product.module.scss'
-import { object, func } from 'prop-types'
-import { Link } from 'react-router'
+import { object } from 'prop-types'
+import { Link, useOutletContext } from 'react-router'
 
-const Product = ({ product, onImageLoad }) => {
+const Product = ({ product }) => {
+  const { onImageLoad } = useOutletContext()
+
   return (
     <div key={product.id} className={classes.product}>
       <Link aria-label="product page" to={`product/${product.id}`}>
@@ -22,7 +24,6 @@ const Product = ({ product, onImageLoad }) => {
 
 Product.propTypes = {
   product: object.isRequired,
-  onImageLoad: func.isRequied,
 }
 
 export default Product

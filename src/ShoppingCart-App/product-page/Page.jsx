@@ -12,12 +12,14 @@ import {
 import { useParams, useOutletContext } from 'react-router'
 
 const ProductPage = () => {
-  const { products } = useOutletContext()
-  const { productId } = useParams()
+  const { products, toggleProductInCart, updateProductCount, cart } =
+    useOutletContext()
+  let { productId } = useParams()
+  productId = Number.parseInt(productId)
 
-  const product = products.find(
-    (product) => product.id === Number.parseInt(productId)
-  )
+  const product = products.find((product) => product.id === productId)
+
+  const isInCart = cart.find((array) => array[0] === productId)
 
   return (
     <section data-testid={`product-${productId}-details`} className={container}>
@@ -30,8 +32,20 @@ const ProductPage = () => {
         <h3 className={title}>{product.title}</h3>
         <p className={description}>{product.description}</p>
         <div className={cont_2}>
-          <button type="button">Add To Cart</button>
-          <Counter />
+          <button
+            onClick={() => {
+              toggleProductInCart(productId)
+            }}
+            type="button"
+          >
+            {isInCart !== undefined ? 'Remove' : 'Add To Cart'}
+          </button>
+          <Counter
+            isInCart={!!isInCart}
+            value={isInCart === undefined ? 1 : isInCart[1]}
+            id={productId}
+            updateValue={updateProductCount}
+          />
         </div>
       </div>
     </section>

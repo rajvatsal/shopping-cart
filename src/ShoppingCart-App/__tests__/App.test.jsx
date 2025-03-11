@@ -106,10 +106,6 @@ describe('App', () => {
         i + 1,
         {
           product: products[i],
-          onImageLoad: expect.any(Function),
-          toggleProduct: expect.any(Function),
-          updateProductCount: expect.any(Function),
-          cart: expect.any(Array),
         },
         undefined
       )
@@ -139,7 +135,7 @@ describe('App', () => {
     expect(loadingScreen).not.toBeInTheDocument()
   })
 
-  it('Header', async () => {
+  it('Header Snapshot', async () => {
     setup()
 
     await getTitles()
@@ -181,7 +177,7 @@ describe('App', () => {
     `)
   })
 
-  it('Header links to home page', async () => {
+  it('Header logo links to home page', async () => {
     const { user, router } = setup()
 
     await screen.findAllByTitle(/category/i)
@@ -190,5 +186,58 @@ describe('App', () => {
     expect(router.state.location.pathname).toBe('/cart-page')
     await user.click(screen.getByRole('link', { name: 'Shopping Cart' }))
     expect(router.state.location.pathname).toBe('/')
+  })
+
+  it('Header shows cart count', async () => {
+    const getProductLinks = async () =>
+      screen.findAllByRole('link', { name: 'product page' })
+    const { user } = setup()
+    let products = await getProductLinks()
+    await user.click(products[0])
+
+    expect(screen.getByTestId('cart-counter').textContent).toBe('0')
+
+    await user.click(screen.getByRole('button', { name: /add to cart/i }))
+
+    expect(screen.getByTestId('cart-counter').textContent).toBe('1')
+
+    await user.click(screen.getByRole('link', { name: 'Shopping Cart' }))
+    products = await getProductLinks()
+    await user.click(products[2])
+    await user.click(screen.getByRole('button', { name: /add to cart/i }))
+
+    expect(screen.getByTestId('cart-counter').textContent).toBe('2')
+
+    await user.click(screen.getByRole('link', { name: 'Shopping Cart' }))
+    products = await getProductLinks()
+    await user.click(products[1])
+    await user.click(screen.getByRole('button', { name: /add to cart/i }))
+
+    expect(screen.getByTestId('cart-counter').textContent).toBe('3')
+
+    await user.click(screen.getByRole('link', { name: 'Shopping Cart' }))
+    products = await getProductLinks()
+    await user.click(products[3])
+    await user.click(screen.getByRole('button', { name: /add to cart/i }))
+
+    expect(screen.getByTestId('cart-counter').textContent).toBe('4')
+
+    await user.click(screen.getByRole('button', { name: /remove/i }))
+
+    expect(screen.getByTestId('cart-counter').textContent).toBe('3')
+
+    await user.click(screen.getByRole('link', { name: 'Shopping Cart' }))
+    products = await getProductLinks()
+    await user.click(products[1])
+    await user.click(screen.getByRole('button', { name: /remove/i }))
+
+    expect(screen.getByTestId('cart-counter').textContent).toBe('2')
+
+    await user.click(screen.getByRole('link', { name: 'Shopping Cart' }))
+    products = await getProductLinks()
+    await user.click(products[2])
+    await user.click(screen.getByRole('button', { name: /remove/i }))
+
+    expect(screen.getByTestId('cart-counter').textContent).toBe('1')
   })
 })

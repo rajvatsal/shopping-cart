@@ -26,7 +26,7 @@ function App() {
     }
   }
 
-  const updateProductCount = (id, count) => {
+  const updateProductCount = (id, count = 1) => {
     let newCart = []
     let foundInCart = false
 
