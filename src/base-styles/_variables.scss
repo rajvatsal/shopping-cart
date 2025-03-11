@@ -7,7 +7,7 @@ $red: #e35757;
 $clr-primary: $space-blue;
 $clr-accent: steelblue;
 $clr-valid: green;
-$clr-invalid: red;
+$clr-invalid: #95190c;
 $clr-warning: orange;
 
 :root {
@@ -51,7 +51,17 @@ $clr-warning: orange;
 
   /* Feedback Colors */
   --clr-semantic_valid-400: #{$clr-valid};
+  --clr-semantic_invalid-300: #{color.adjust(
+      $clr-invalid,
+      $space: oklch,
+      $lightness: 44%
+    )};
   --clr-semantic_invalid-400: #{$clr-invalid};
+  --clr-semantic_invalid-500: #{color.adjust(
+      $clr-invalid,
+      $space: oklch,
+      $lightness: -10%
+    )};
   --clr-semantic_warning-400: #{$clr-warning};
 
   /* --------------------------------

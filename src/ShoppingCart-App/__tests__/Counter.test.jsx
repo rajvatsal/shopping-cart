@@ -49,7 +49,9 @@ describe('Product Counter', () => {
     const element = setup()
     expect(element.container).toMatchInlineSnapshot(`
       <div>
-        <select>
+        <select
+          aria-label="product count"
+        >
           <option
             value="1"
           >

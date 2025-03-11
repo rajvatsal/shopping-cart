@@ -37,6 +37,14 @@ const setup = () => {
 }
 
 describe('Cart Page', () => {
+  const addToCart = async (usr) =>
+    usr.click(screen.getByRole('button', { name: /add to cart/i }))
+  const selectOption = async (usr, opt, count) =>
+    usr.selectOptions(
+      screen.getAllByRole('combobox', { name: 'product count' })[count],
+      opt
+    )
+
   it('Loads in outlet', async () => {
     const { user } = setup()
 
@@ -75,13 +83,19 @@ describe('Cart Page', () => {
     ).toBe(`$0`)
   })
 
-  it.skip('Price', async () => {
-    const { user } = setup()
+  it('Price', async () => {
+    const { user, router } = setup()
     await screen.findAllByTitle('category')
 
-    const btns = screen.getAllByRole('button', { name: /add to cart/i })
-    await user.click(btns[0])
-    await user.click(btns[2])
+    act(() => {
+      router.navigate('/product/3')
+    })
+    await addToCart(user)
+    act(() => {
+      router.navigate('/product/1')
+    })
+    await addToCart(user)
+
     await user.click(screen.getByRole('link', { name: 'cart page' }))
 
     expect(screen.queryAllByTestId('product-cart-page').length).toBe(2)
@@ -91,8 +105,15 @@ describe('Cart Page', () => {
     ).toBe(`$${products[0].price + products[2].price}`)
   })
 
-  it.skip('Product Snapshot', async () => {
-    const { user } = setup()
+  it('Product Snapshot', async () => {
+    const { user, router } = setup()
+
+    await screen.findAllByRole('link', { name: 'product page' })
+
+    act(() => {
+      router.navigate('/product/1')
+    })
+    await addToCart(user)
 
     await user.click(screen.getByRole('link', { name: 'cart page' }))
 
@@ -108,20 +129,64 @@ describe('Cart Page', () => {
             $
             500
           </h2>
-          <div>
-            <button>
-              -
-            </button>
-            <input
-              min="0"
-              type="number"
+          <select
+            aria-label="product count"
+          >
+            <option
+              selected=""
               value="1"
-            />
-            <button>
-              +
-            </button>
-          </div>
-          <button>
+            >
+              1
+            </option>
+            <option
+              value="2"
+            >
+              2
+            </option>
+            <option
+              value="3"
+            >
+              3
+            </option>
+            <option
+              value="4"
+            >
+              4
+            </option>
+            <option
+              value="5"
+            >
+              5
+            </option>
+            <option
+              value="6"
+            >
+              6
+            </option>
+            <option
+              value="7"
+            >
+              7
+            </option>
+            <option
+              value="8"
+            >
+              8
+            </option>
+            <option
+              value="9"
+            >
+              9
+            </option>
+            <option
+              value="10"
+            >
+              10
+            </option>
+          </select>
+          <button
+            class="undefined btn--primary"
+          >
             remove
           </button>
         </div>
@@ -133,16 +198,26 @@ describe('Cart Page', () => {
     `)
   })
 
-  it.skip('Has counter', async () => {
-    const { user } = setup()
+  it('Counter is called correctly', async () => {
+    const { user, router } = setup()
+
+    await screen.findAllByRole('link', { name: 'product page' })
+
+    for (let i = 0; i < 3; i++) {
+      act(() => {
+        router.navigate('/product/' + (i + 1))
+      })
+      await addToCart(user)
+    }
 
     Counter.mockClear()
-    await user.click(screen.getByRole('link', { name: /cart page/i }))
+    await user.click(screen.getByRole('link', { name: 'cart page' }))
 
     expect(Counter).toHaveBeenCalledTimes(3)
     expect(Counter).toHaveBeenNthCalledWith(
       1,
       {
+        isInCart: true,
         value: 1,
         updateValue: expect.any(Function),
         id: 1,
@@ -152,6 +227,7 @@ describe('Cart Page', () => {
     expect(Counter).toHaveBeenNthCalledWith(
       2,
       {
+        isInCart: true,
         value: 1,
         updateValue: expect.any(Function),
         id: 2,
@@ -161,25 +237,40 @@ describe('Cart Page', () => {
     expect(Counter).toHaveBeenNthCalledWith(
       3,
       {
+        isInCart: true,
         value: 1,
         updateValue: expect.any(Function),
-        id: 4,
+        id: 3,
       },
       undefined
     )
 
-    await user.click(screen.getAllByRole('button', { name: '+' })[0])
+    await selectOption(user, '5', 0)
 
     expect(
       screen.getByRole('generic', { name: 'total price of cart' }).textContent
-    ).toBe(`$${products[0].price * 2 + products[1].price + products[3].price}`)
+    ).toBe(`$${products[0].price * 5 + products[1].price + products[2].price}`)
+
+    await selectOption(user, '2', 1)
+
+    expect(
+      screen.getByRole('generic', { name: 'total price of cart' }).textContent
+    ).toBe(
+      `$${products[0].price * 5 + products[1].price * 2 + products[2].price}`
+    )
   })
 
-  it.skip('Remove button works', async () => {
+  it('Remove button works', async () => {
     const { user, router } = setup()
 
+    await screen.findAllByRole('link', { name: 'product page' })
+
     act(() => {
-      router.navigate('cart-page')
+      router.navigate('/product/3')
+    })
+    await addToCart(user)
+    act(() => {
+      router.navigate('/cart-page')
     })
 
     const price = screen.getByRole('generic', { name: /price/i })

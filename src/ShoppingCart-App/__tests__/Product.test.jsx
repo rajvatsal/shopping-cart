@@ -32,10 +32,8 @@ const setup = () => {
 describe('Product comonent in index page', () => {
   it('Snapshot', async () => {
     setup()
-    await screen.findAllByTitle(/category/i)
-    expect(
-      screen.getAllByRole('link', { name: 'product page' })[0]
-    ).toMatchInlineSnapshot(`
+    const product = await screen.findAllByRole('link', { name: 'product page' })
+    expect(product[0]).toMatchInlineSnapshot(`
       <a
         aria-label="product page"
         data-discover="true"

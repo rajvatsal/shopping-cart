@@ -67,11 +67,14 @@ describe('Product Page', () => {
           </p>
           <div>
             <button
+              class="btn--primary"
               type="button"
             >
               Add To Cart
             </button>
-            <select>
+            <select
+              aria-label="product count"
+            >
               <option
                 selected=""
                 value="1"
@@ -156,11 +159,14 @@ describe('Product Page', () => {
           </p>
           <div>
             <button
+              class="btn--primary"
               type="button"
             >
               Add To Cart
             </button>
-            <select>
+            <select
+              aria-label="product count"
+            >
               <option
                 selected=""
                 value="1"
@@ -245,11 +251,14 @@ describe('Product Page', () => {
           </p>
           <div>
             <button
+              class="btn--primary"
               type="button"
             >
               Add To Cart
             </button>
-            <select>
+            <select
+              aria-label="product count"
+            >
               <option
                 selected=""
                 value="1"
