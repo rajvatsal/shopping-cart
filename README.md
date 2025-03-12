@@ -13,6 +13,7 @@
 - error handling
 - filter tags
 - items count that are visible with current filter
+- Responsiveness
 
 
 ## Inspirations
