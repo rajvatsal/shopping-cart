@@ -1,4 +1,3 @@
-import { ScrollRestoration } from 'react-router'
 import Product from '../Product.jsx'
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
@@ -17,7 +16,6 @@ import {
   getByTestId,
 } from '@testing-library/react'
 
-window.scrollTo = vi.fn()
 afterEach(() => {
   cleanup()
   vi.clearAllMocks()
@@ -47,11 +45,8 @@ const setup = () => {
 }
 
 describe('App', () => {
-  const getAddBtns = async () => screen.findAllByRole('button', { name: '+' })
-  const getSubBtns = async () => screen.findAllByRole('button', { name: '-' })
   const getCartPageLink = () => screen.getByRole('link', { name: 'cart page' })
   const getTitles = async () => screen.findAllByTitle(/category/i)
-  const getProductCounterInput = async () => screen.findAllByRole('spinbutton')
   const getPrice = () =>
     screen.getByRole('generic', { name: 'total price of cart' })
 

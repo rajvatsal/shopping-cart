@@ -57,7 +57,7 @@ describe('Routes', () => {
     `)
   })
 
-  it('scroll to is called on each page', async () => {
+  it('ScrollRestoration is called on page', async () => {
     const { router } = setup()
 
     await screen.findAllByRole('link', { name: 'product page' })
