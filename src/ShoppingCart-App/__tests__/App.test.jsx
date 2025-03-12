@@ -1,3 +1,4 @@
+import { ScrollRestoration } from 'react-router'
 import Product from '../Product.jsx'
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
@@ -16,6 +17,7 @@ import {
   getByTestId,
 } from '@testing-library/react'
 
+window.scrollTo = vi.fn()
 afterEach(() => {
   cleanup()
   vi.clearAllMocks()
