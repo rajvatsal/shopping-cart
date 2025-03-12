@@ -1,21 +1,22 @@
-# PLAN
+## Room For Improvements
 
-- update fonts
-- update header icon and border and top
+- Better price section. Should be like a transcript that shows all price with count and sub total
+- Checkout button
+- Search bar
+- More filter price range, rating
+- Scroll to top on new page
+- move filter to the left
+- remove secondary hero from products
+- have a hero page and seperate products page
+- like button
+- home, store and bag page
+- error handling
+- filter tags
+- items count that are visible with current filter
 
-- change index page design
-    - remove add cart and counter from front page
-    - change counter style to use `<select>` instead for `<input>`
-    - show only 3 cards per row and the gap should equal to the `inline-padding` of the section
-    - each page should have a introduction section
-    - fonts: style script and fira sans
-    - header should stick add `top: 0`
-    - use icon in cart page button
-    - use light dark color for fonts
-    - get a better primary color
 
-- cart page design
-    - fix overflow due to name
-    - make price as position sticky or fixed
-    - maybe add a buy button
-- refactor: design similar to (brooklinen)[https://www.brooklinen.com/]
+## Inspirations
+
+(brooklinen)[https://www.brooklinen.com/]
+(wool's store)[https://darkwool.github.io/shopping-cart/#/] HERO SECTION
+(fruits.)[https://fruitsstoremarket.netlify.app/store] FEATURES AND DESIGN
