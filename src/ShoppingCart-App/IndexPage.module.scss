@@ -2,9 +2,11 @@
   --pd-inline: var(--sp-700);
 
   &__products {
+    --row: 450px;
     padding-inline: var(--pd-inline);
     display: grid;
-    grid-template: 1fr / repeat(auto-fill, minmax(300px, 1fr));
+    grid-template: var(--row) / repeat(auto-fill, minmax(300px, 1fr));
+    grid-auto-rows: var(--row);
     gap: var(--pd-inline);
     list-style: none;
   }
