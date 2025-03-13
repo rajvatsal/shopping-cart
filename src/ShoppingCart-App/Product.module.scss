@@ -1,13 +1,16 @@
 .product {
+  --shadow: 20px;
   height: 100%;
   position: relative;
   transition:
     box-shadow 150ms ease,
-    padding 150ms ease;
+    padding 150ms ease,
+    border 150ms ease;
 
   &:hover,
   &:focus-within {
-    box-shadow: -10px 10px var(--clr-primary-300);
+    border: 1px solid var(--clr-primary-500);
+    box-shadow: -20px 20px var(--clr-primary-500);
     padding: var(--sp-400);
   }
 

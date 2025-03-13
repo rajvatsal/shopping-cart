@@ -32,14 +32,19 @@ $clr-warning: orange;
   --clr-primary-200: #{color.adjust(
       $clr-primary,
       $space: oklch,
-      $lightness: -20%
+      $lightness: 20%
     )};
   --clr-primary-300: #{color.adjust(
       $clr-primary,
       $space: oklch,
-      $lightness: -10%
+      $lightness: 10%
     )};
   --clr-primary-400: #{$clr-primary};
+  --clr-primary-500: #{color.adjust(
+      $clr-primary,
+      $space: oklch,
+      $lightness: -10%
+    )};
 
   --clr-accent-300: #{color.adjust(
       $clr-accent,
