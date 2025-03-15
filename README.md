@@ -1,5 +1,6 @@
 ## Room For Improvements
 
+- Differentiate between integration, unit and e2e testing
 - Better price section. Should be like a transcript that shows all price with count and sub total
 - Checkout button
 - Search bar
