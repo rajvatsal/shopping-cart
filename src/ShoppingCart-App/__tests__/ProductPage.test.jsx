@@ -3,13 +3,28 @@ import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen, cleanup, act } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import { routes } from '../../routes.jsx'
-import { createMemoryRouter, RouterProvider } from 'react-router'
+import {
+  createMemoryRouter,
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router'
 
-const setup = () => {
+const setup = async () => {
   const router = createMemoryRouter(routes, { initialEntries: ['/'] })
+  const usr = userEvent.setup()
+
+  vi.useFakeTimers()
+  const rn = render(<RouterProvider router={router} />)
+
+  await act(async () => {
+    await vi.advanceTimersByTimeAsync(500)
+  })
+
+  vi.useRealTimers()
+
   return {
-    user: userEvent.setup(),
-    render: render(<RouterProvider router={router} />),
+    user: usr,
+    render: rn,
     router: router,
   }
 }
@@ -26,7 +41,14 @@ const { products } = await vi.hoisted(
 
 vi.mock('../../ShoppingCart-Core/api.js', () => {
   return {
-    fetchData: vi.fn().mockResolvedValue(products),
+    fetchData: vi.fn(
+      async () =>
+        new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(products)
+          }, 500)
+        })
+    ),
   }
 })
 
@@ -40,7 +62,8 @@ describe('Product Page', () => {
   const getSection = (id) => screen.getByTestId(`product-${id}-details`)
 
   it('Snapshot', async () => {
-    const { user } = setup()
+    const { user } = await setup()
+
     let pages = await getProductLinks()
     await user.click(pages[0])
 
@@ -318,7 +341,7 @@ describe('Product Page', () => {
   })
 
   it('Counter is called correctly', async () => {
-    const { router } = setup()
+    const { router } = await setup()
     await screen.findAllByRole('link', { name: 'product page' })
 
     act(() => {
@@ -337,7 +360,7 @@ describe('Product Page', () => {
   })
 
   it('Counter value is synced between pages', async () => {
-    const { router, user } = setup()
+    const { router, user } = await setup()
     await screen.findAllByRole('link', { name: 'product page' })
 
     act(() => {
@@ -361,7 +384,7 @@ describe('Product Page', () => {
   })
 
   it("Counter just changing counter shouldn't add it to cart", async () => {
-    const { router, user } = setup()
+    const { router, user } = await setup()
 
     await screen.findAllByTitle(/category/i)
 
@@ -385,5 +408,30 @@ describe('Product Page', () => {
     expect(screen.getByRole('generic', { name: /price/i }).textContent).toBe(
       '$0'
     )
+  })
+
+  it("Doesn't throw error when opened reloaded", async () => {
+    const router = createBrowserRouter(routes)
+
+    vi.useFakeTimers()
+    render(<RouterProvider router={router} />)
+
+    expect(screen.getByTestId('loading-screen')).toBeInTheDocument()
+
+    act(() => {
+      router.navigate('product/2')
+    })
+
+    await act(async () => {
+      vi.advanceTimersByTime(501)
+    })
+
+    vi.useRealTimers()
+
+    expect(
+      screen.queryByRole('heading', { level: 2, name: /Error/i })
+    ).not.toBeInTheDocument()
+
+    expect(screen.queryByTestId('loading-screen')).not.toBeInTheDocument()
   })
 })

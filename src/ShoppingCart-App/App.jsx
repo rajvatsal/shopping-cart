@@ -75,6 +75,9 @@ function App() {
     const getProducts = async () => {
       const products = await fetchData()
       setProducts(products)
+      if (window.location.href.slice(-1) !== '/') {
+        setLoadingState(false)
+      }
     }
 
     getProducts()

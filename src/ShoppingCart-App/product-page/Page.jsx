@@ -19,6 +19,10 @@ const ProductPage = () => {
 
   const product = products.find((product) => product.id === productId)
 
+  if (!product) {
+    return null
+  }
+
   const isInCart = cart.find((array) => array[0] === productId)
 
   return (
