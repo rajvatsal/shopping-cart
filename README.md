@@ -1,6 +1,7 @@
 ## Room For Improvements
 
-- Differentiate between integration, unit and e2e testing
+- Add a way to differentiate (change styling) of the product that is in cart.
+- Rwrite tests and divide them in unit, integration and e2e testing
 - Better price section. Should be like a transcript that shows all price with count and sub total
 - Checkout button
 - Search bar
