@@ -1,9 +1,10 @@
 import { counter } from './Counter.module.scss'
-import { func, number, bool } from 'prop-types'
+import { func, number, bool, object } from 'prop-types'
 
-const Counter = ({ isInCart, value, id, updateValue }) => {
+const Counter = ({ ref, isInCart, value, id, updateValue }) => {
   return (
     <select
+      ref={ref}
       aria-label="product count"
       className={counter}
       defaultValue={value}
@@ -28,6 +29,7 @@ const Counter = ({ isInCart, value, id, updateValue }) => {
 }
 
 Counter.propTypes = {
+  ref: object,
   value: number,
   id: number,
   updateValue: func,

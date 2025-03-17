@@ -247,7 +247,7 @@ describe('Cart Page', () => {
       1,
       {
         isInCart: true,
-        value: 1,
+        value: '1',
         updateValue: expect.any(Function),
         id: 1,
       },
@@ -257,8 +257,8 @@ describe('Cart Page', () => {
       2,
       {
         isInCart: true,
-        value: 1,
         updateValue: expect.any(Function),
+        value: '1',
         id: 2,
       },
       undefined
@@ -267,8 +267,8 @@ describe('Cart Page', () => {
       3,
       {
         isInCart: true,
-        value: 1,
         updateValue: expect.any(Function),
+        value: '1',
         id: 3,
       },
       undefined

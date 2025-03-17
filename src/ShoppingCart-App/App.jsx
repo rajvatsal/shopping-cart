@@ -26,7 +26,7 @@ function App() {
     }
   }
 
-  const updateProductCount = (id, count = 1) => {
+  const updateProductCount = (id, count = 1, remove = false) => {
     let newCart = []
     let foundInCart = false
 
@@ -36,6 +36,7 @@ function App() {
       for (let product of cart) {
         if (product[0] === id) {
           foundInCart = true
+          if (remove) continue
           newCart.push([id, count])
         } else newCart.push(product)
       }
@@ -45,29 +46,6 @@ function App() {
       }
     }
 
-    setCart(newCart)
-  }
-
-  const toggleProductInCart = (id, count = 1) => {
-    id = Number.parseInt(id)
-    count = Number.parseInt(count)
-    const newCart = []
-    let isInCart = false
-
-    for (const item of cart) {
-      if (item[0] === id) {
-        isInCart = true
-        continue
-      }
-      newCart.push([item[0], item[1]])
-    }
-
-    if (isInCart) {
-      setCart(newCart)
-      return
-    }
-
-    newCart.push([id, count])
     setCart(newCart)
   }
 
@@ -100,7 +78,6 @@ function App() {
         context={{
           cart,
           products,
-          toggleProductInCart,
           onImageLoad,
           updateProductCount,
         }}

@@ -10,11 +10,12 @@ import {
   cont_2,
 } from './Page.module.scss'
 import { useParams, useOutletContext } from 'react-router'
+import { useRef } from 'react'
 
 const ProductPage = () => {
-  const { products, toggleProductInCart, updateProductCount, cart } =
-    useOutletContext()
+  const { products, updateProductCount, cart } = useOutletContext()
   let { productId } = useParams()
+  const counterRef = useRef(null)
   productId = Number.parseInt(productId)
 
   const product = products.find((product) => product.id === productId)
@@ -39,13 +40,18 @@ const ProductPage = () => {
           <button
             className="btn--primary"
             onClick={() => {
-              toggleProductInCart(productId)
+              updateProductCount(
+                productId,
+                counterRef.current.value,
+                !!isInCart
+              )
             }}
             type="button"
           >
             {isInCart !== undefined ? 'Remove' : 'Add To Cart'}
           </button>
           <Counter
+            ref={counterRef}
             isInCart={!!isInCart}
             value={isInCart === undefined ? 1 : isInCart[1]}
             id={productId}

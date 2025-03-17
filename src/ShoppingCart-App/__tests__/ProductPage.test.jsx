@@ -352,8 +352,9 @@ describe('Product Page', () => {
       {
         isInCart: false,
         updateValue: expect.any(Function),
+        ref: expect.any(Object),
         id: 1,
-        value: expect.any(Number),
+        value: 1,
       },
       undefined
     )
@@ -433,5 +434,24 @@ describe('Product Page', () => {
     ).not.toBeInTheDocument()
 
     expect(screen.queryByTestId('loading-screen')).not.toBeInTheDocument()
+  })
+
+  it('Add to cart adds correct amount', async () => {
+    const { router, user } = await setup()
+
+    act(() => {
+      router.navigate('product/2')
+    })
+
+    await user.selectOptions(screen.getByRole('combobox'), '5')
+    await user.click(screen.getByRole('button', { name: /add to cart/i }))
+
+    act(() => {
+      router.navigate('/cart-page')
+    })
+
+    expect(screen.getByRole('generic', { name: /price/i }).textContent).toBe(
+      `$${products[1].price * 5}`
+    )
   })
 })
