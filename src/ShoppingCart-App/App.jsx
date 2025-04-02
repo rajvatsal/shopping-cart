@@ -1,4 +1,3 @@
-import Bag from './Icons/Bag.jsx'
 import BagOutline from './Icons/BagOutline.jsx'
 import {
   appHeader,
