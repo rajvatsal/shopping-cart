@@ -4,15 +4,16 @@ import Product from './Product.jsx'
 import { indexPage, indexPage__products } from './IndexPage.module.scss'
 import { useState } from 'react'
 import { useOutletContext } from 'react-router'
+import { AppContext } from './App.tsx'
 
 const IndexPage = () => {
-  const [filter, setFilter] = useState([])
-  const { products } = useOutletContext()
+  const [filter, setFilter] = useState<string[]>([])
+  const { products } = useOutletContext<AppContext>()
 
-  const addFilter = (newFilter) => {
+  const addFilter = (newFilter: string) => {
     setFilter([...filter, newFilter])
   }
-  const removeFilter = (oldFilter) => {
+  const removeFilter = (oldFilter: string) => {
     setFilter(filter.filter((fl) => fl !== oldFilter))
   }
 

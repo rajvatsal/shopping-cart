@@ -1,24 +1,25 @@
-import SecondaryHero from '../SecondaryHero.jsx'
-import Product from './Product.jsx'
 import {
   page,
   page__items,
   page__price,
   emptyPageHeading,
 } from './Page.module.scss'
+import SecondaryHero from '../SecondaryHero.jsx'
+import Product from './Product.tsx'
 import { useOutletContext } from 'react-router'
+import { AppContext } from '../App.tsx'
 
-const round = (num) => Math.round((num + Number.EPSILON) * 100) / 100
+const round = (num: number) => Math.round((num + Number.EPSILON) * 100) / 100
 
 const CartPage = () => {
-  const { cart, products } = useOutletContext()
-  let cartDetails = []
+  const { cart, products } = useOutletContext<AppContext>()
+  const cartDetails = []
 
+  // add count details for product
   for (const product of products) {
     for (const item of cart) {
       if (item[0] === product.id) {
-        product.count = item[1]
-        cartDetails.push(product)
+        cartDetails.push({ product, count: item[1] })
         break
       }
     }
@@ -32,15 +33,21 @@ const CartPage = () => {
           <h2 className={emptyPageHeading}>Cart is empty :..(</h2>
         ) : (
           <ul className={page__items}>
-            {cartDetails.map((product) => (
+            {cartDetails.map(({ product, count }) => (
               <li key={product.id}>
-                <Product details={product} />
+                <Product product={product} count={count} />
               </li>
             ))}
           </ul>
         )}
         <div aria-label="total price of cart" className={page__price}>
-          ${round(cartDetails.reduce((acc, p) => acc + p.price * p.count, 0))}
+          $
+          {round(
+            cartDetails.reduce(
+              (acc, { product, count }) => acc + product.price * count,
+              0
+            )
+          )}
         </div>
       </section>
     </>

@@ -1,8 +1,12 @@
-import ProductPage from './ShoppingCart-App/product-page/Page.jsx'
-import Index from './ShoppingCart-App/IndexPage.jsx'
-import CartPage from './ShoppingCart-App/cart-page/Page.jsx'
-import App from './ShoppingCart-App/App.jsx'
+import ProductPage from './ShoppingCart-App/product-page/Page.tsx'
+import Index from './ShoppingCart-App/IndexPage.tsx'
+import CartPage from './ShoppingCart-App/cart-page/Page.tsx'
+import App from './ShoppingCart-App/App.tsx'
 import { ScrollRestoration, Outlet } from 'react-router'
+
+interface routesObj {
+  [key: string]: any
+}
 
 const AppLayout = () => (
   <>
@@ -11,7 +15,7 @@ const AppLayout = () => (
   </>
 )
 
-const routes = [
+const routes: routesObj[] = [
   {
     element: <AppLayout />,
     children: [

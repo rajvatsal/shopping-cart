@@ -11,23 +11,24 @@ import {
 } from './Page.module.scss'
 import { useParams, useOutletContext } from 'react-router'
 import { useRef } from 'react'
+import { AppContext } from '../App.tsx'
 
 const ProductPage = () => {
-  const { products, updateProductCount, cart } = useOutletContext()
-  let { productId } = useParams()
-  const counterRef = useRef(null)
-  productId = Number.parseInt(productId)
+  const { products, updateProductCount, cart } = useOutletContext<AppContext>()
+  const { productId } = useParams()
+  const counterRef = useRef<HTMLSelectElement>(null)
+  const id = Number.parseInt(productId ?? '')
 
-  const product = products.find((product) => product.id === productId)
+  const product = products.find((product) => product.id === id)
 
   if (!product) {
     return null
   }
 
-  const isInCart = cart.find((array) => array[0] === productId)
+  const isInCart = cart.find((array) => array[0] === id)
 
   return (
-    <section data-testid={`product-${productId}-details`} className={container}>
+    <section data-testid={`product-${id}-details`} className={container}>
       <img src={product.image} alt="product image" className={image} />
       <div>
         <div className={cont_1}>
@@ -41,8 +42,10 @@ const ProductPage = () => {
             className="btn--primary"
             onClick={() => {
               updateProductCount(
-                productId,
-                counterRef.current.value,
+                id,
+                Number.parseInt(
+                  counterRef.current === null ? '0' : counterRef.current.value
+                ),
                 !!isInCart
               )
             }}
@@ -54,7 +57,7 @@ const ProductPage = () => {
             ref={counterRef}
             isInCart={!!isInCart}
             value={isInCart === undefined ? 1 : isInCart[1]}
-            id={productId}
+            id={id}
             updateValue={updateProductCount}
           />
         </div>

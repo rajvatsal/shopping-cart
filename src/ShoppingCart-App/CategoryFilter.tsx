@@ -1,11 +1,17 @@
 import { categories, categories__heading } from './CategoryFilter.module.scss'
-import { func, string } from 'prop-types'
 
-const Categories = ({ add, remove }) => {
-  const onClick = (item) => (e) => {
-    if (e.target.checked === false) remove(item)
-    else add(item)
-  }
+interface CategoriesCmp {
+  add: (tag: string) => void
+  remove: (tag: string) => void
+}
+
+const Categories = ({ add, remove }: CategoriesCmp) => {
+  const onClick =
+    (item: string): React.ChangeEventHandler<HTMLInputElement> =>
+      (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.checked === false) remove(item)
+        else add(item)
+      }
 
   return (
     <div data-testid="categories-component" className={categories}>
@@ -13,7 +19,7 @@ const Categories = ({ add, remove }) => {
       <div>
         <label>
           <input
-            onClick={onClick('jewelery')}
+            onChange={onClick('jewelery')}
             defaultChecked={false}
             type="checkbox"
           />
@@ -22,7 +28,7 @@ const Categories = ({ add, remove }) => {
         <label>
           <input
             type="checkbox"
-            onClick={onClick('electronics')}
+            onChange={onClick('electronics')}
             defaultChecked={false}
           />
           Electronics
@@ -30,7 +36,7 @@ const Categories = ({ add, remove }) => {
         <label>
           <input
             type="checkbox"
-            onClick={onClick("men's clothing")}
+            onChange={onClick("men's clothing")}
             defaultChecked={false}
           />
           Men's Clothing
@@ -38,7 +44,7 @@ const Categories = ({ add, remove }) => {
         <label>
           <input
             type="checkbox"
-            onClick={onClick("women's clothing")}
+            onChange={onClick("women's clothing")}
             defaultChecked={false}
           />
           Women's Clothing
@@ -46,12 +52,6 @@ const Categories = ({ add, remove }) => {
       </div>
     </div>
   )
-}
-
-Categories.propTypes = {
-  add: func.isRequired,
-  remove: func.isRequired,
-  className: string,
 }
 
 export default Categories

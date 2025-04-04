@@ -1,7 +1,14 @@
 import { counter } from './Counter.module.scss'
-import { func, number, bool, object } from 'prop-types'
 
-const Counter = ({ ref, isInCart, value, id, updateValue }) => {
+interface CounterCmp {
+  ref: React.RefObject<HTMLSelectElement> | React.RefObject<null> | undefined
+  isInCart: boolean
+  value: number
+  id: number
+  updateValue: (id: number, count: number, remove: boolean) => void
+}
+
+const Counter = ({ ref, isInCart, value, id, updateValue }: CounterCmp) => {
   return (
     <select
       ref={ref}
@@ -10,7 +17,7 @@ const Counter = ({ ref, isInCart, value, id, updateValue }) => {
       defaultValue={value}
       onChange={(e) => {
         if (isInCart) {
-          updateValue(id, Number.parseInt(e.target.value))
+          updateValue(id, Number.parseInt(e.target.value), false)
         }
       }}
     >
@@ -26,14 +33,6 @@ const Counter = ({ ref, isInCart, value, id, updateValue }) => {
       <option value="10">10</option>
     </select>
   )
-}
-
-Counter.propTypes = {
-  ref: object,
-  value: number,
-  id: number,
-  updateValue: func,
-  isInCart: bool,
 }
 
 export default Counter

@@ -1,6 +1,4 @@
-import { string } from 'prop-types'
-
-const Solid = ({ className }) => (
+const Solid = ({ className }: { className: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -15,7 +13,7 @@ const Solid = ({ className }) => (
   </svg>
 )
 
-const Outline = ({ className }) => (
+const Outline = ({ className }: { className: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -31,13 +29,5 @@ const Outline = ({ className }) => (
     />
   </svg>
 )
-
-Solid.propTypes = {
-  className: string,
-}
-
-Outline.propTypes = {
-  className: string,
-}
 
 export { Solid, Outline }

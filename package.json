@@ -22,8 +22,9 @@
 		"@testing-library/jest-dom": "^6.6.3",
 		"@testing-library/react": "^16.2.0",
 		"@testing-library/user-event": "^14.6.1",
-		"@types/react": "^19.0.8",
-		"@types/react-dom": "^19.0.3",
+		"@types/react": "^19.1.0",
+		"@types/react-dom": "^19.1.1",
+		"@typescript-eslint/eslint-plugin": "^8.29.0",
 		"@vitejs/plugin-react": "^4.3.4",
 		"eslint": "^9.19.0",
 		"eslint-plugin-react": "^7.37.4",
@@ -34,6 +35,9 @@
 		"sass": "^1.85.0",
 		"sass-loader": "^16.0.5",
 		"stylelint-config-sass-guidelines": "^12.1.0",
+		"typescript": "^5.8.2",
+		"typescript-eslint": "^8.29.0",
+		"typescript-plugin-css-modules": "^5.1.0",
 		"vite": "^6.1.0",
 		"vitest": "^3.0.6"
 	}

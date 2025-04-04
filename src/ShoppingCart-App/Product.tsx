@@ -1,9 +1,10 @@
 import classes from './Product.module.scss'
-import { object } from 'prop-types'
 import { Link, useOutletContext } from 'react-router'
+import { AppContext } from './App'
+import * as api from '../ShoppingCart-Core/api'
 
-const Product = ({ product }) => {
-  const { onImageLoad } = useOutletContext()
+const Product = ({ product }: { product: api.Product }) => {
+  const { onImageLoad } = useOutletContext<AppContext>()
 
   return (
     <div key={product.id} className={classes.product}>
@@ -20,10 +21,6 @@ const Product = ({ product }) => {
       </Link>
     </div>
   )
-}
-
-Product.propTypes = {
-  product: object.isRequired,
 }
 
 export default Product

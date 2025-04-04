@@ -16,6 +16,7 @@
 - filter tags
 - items count that are visible with current filter
 - Responsiveness
+- Remove secondary heading looks ugly and takes away attention
 
 
 ## Inspirations

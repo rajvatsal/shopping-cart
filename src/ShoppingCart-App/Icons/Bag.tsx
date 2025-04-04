@@ -1,6 +1,4 @@
-import { string } from 'prop-types'
-
-const Bag = ({ className }) => (
+const Bag = ({ className }: { className: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -15,9 +13,5 @@ const Bag = ({ className }) => (
     />
   </svg>
 )
-
-Bag.propTypes = {
-  className: string,
-}
 
 export default Bag

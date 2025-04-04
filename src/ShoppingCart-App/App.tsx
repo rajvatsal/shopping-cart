@@ -1,4 +1,3 @@
-import BagOutline from './Icons/BagOutline.jsx'
 import {
   appHeader,
   appHeader__logo,
@@ -8,14 +7,22 @@ import {
   cartLink__icon,
   cartLink__count,
 } from './App.module.scss'
-import { fetchData } from '../ShoppingCart-Core/api.js'
+import BagOutline from './Icons/BagOutline.tsx'
+import { fetchProducts, Product } from '../ShoppingCart-Core/api.ts'
 import { useState, useEffect, useRef } from 'react'
 import { Link, Outlet } from 'react-router'
 
+export interface AppContext {
+  cart: number[][]
+  products: Product[]
+  onImageLoad: () => void
+  updateProductCount: (id: number, count: number, remove: boolean) => void
+}
+
 function App() {
-  const [products, setProducts] = useState([])
-  const [loadingState, setLoadingState] = useState(true)
-  const [cart, setCart] = useState([])
+  const [products, setProducts] = useState<Product[]>([])
+  const [loadingState, setLoadingState] = useState<boolean>(true)
+  const [cart, setCart] = useState<number[][] | []>([])
 
   const loadedImageCount = useRef(0)
 
@@ -25,14 +32,14 @@ function App() {
     }
   }
 
-  const updateProductCount = (id, count = 1, remove = false) => {
+  const updateProductCount = (id: number, count = 1, remove = false) => {
     let newCart = []
     let foundInCart = false
 
     if (!count) {
       newCart = cart.filter((arr) => arr[0] !== id)
     } else {
-      for (let product of cart) {
+      for (const product of cart) {
         if (product[0] === id) {
           foundInCart = true
           if (remove) continue
@@ -50,7 +57,7 @@ function App() {
 
   useEffect(() => {
     const getProducts = async () => {
-      const products = await fetchData()
+      const products = await fetchProducts()
       setProducts(products)
       if (window.location.href.slice(-1) !== '/') {
         setLoadingState(false)

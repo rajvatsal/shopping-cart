@@ -3,9 +3,11 @@ import globals from 'globals'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
 
-export default [
-  { ignores: ['dist'] },
+const baseConfig = [
+  { ignores: ['dist', 'node-modules'] },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
@@ -32,7 +34,25 @@ export default [
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
-      ],
+      ]
     },
   },
 ]
+
+const customConfig = [
+  {},
+  {
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+    }
+  }
+];
+
+const config = tseslint.config(
+  baseConfig,
+  eslint.configs.recommended,
+  tseslint.configs.recommended,
+  customConfig,
+);
+
+export default config;
