@@ -3,6 +3,7 @@ import { describe, it, expect, vi, afterEach } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
 import { createMemoryRouter, RouterProvider } from 'react-router'
 import { routes } from '../../routes.tsx'
+import '@testing-library/jest-dom'
 import {
   render,
   act,
@@ -42,11 +43,7 @@ const setup = () => {
 }
 
 describe('App', () => {
-  const getCartPageLink = () => screen.getByRole('link', { name: 'cart page' })
   const getTitles = async () => screen.findAllByTitle(/category/i)
-  const getPrice = () =>
-    screen.getByRole('generic', { name: 'total price of cart' })
-
   it('Heading', async () => {
     setup()
 
@@ -95,7 +92,7 @@ describe('App', () => {
 
     await getTitles()
 
-    products.forEach((product, i) => {
+    products.forEach((_, i) => {
       expect(Product).toHaveBeenNthCalledWith(
         i + 1,
         {

@@ -5,6 +5,7 @@ import { render, screen, cleanup, act } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 import { routes } from '../../routes.jsx'
 import { RouterProvider, createMemoryRouter } from 'react-router'
+import { UserEvent } from '@testing-library/user-event/dist/types/setup/setup.js'
 
 afterEach(() => {
   vi.clearAllMocks()
@@ -37,9 +38,9 @@ const setup = () => {
 }
 
 describe('Cart Page', () => {
-  const addToCart = async (usr) =>
+  const addToCart = async (usr: UserEvent) =>
     usr.click(screen.getByRole('button', { name: /add to cart/i }))
-  const selectOption = async (usr, opt, count) =>
+  const selectOption = async (usr: UserEvent, opt: string, count: number) =>
     usr.selectOptions(
       screen.getAllByRole('combobox', { name: 'product count' })[count],
       opt
@@ -239,7 +240,7 @@ describe('Cart Page', () => {
       await addToCart(user)
     }
 
-    Counter.mockClear()
+    vi.mocked(Counter).mockClear()
     await user.click(screen.getByRole('link', { name: 'cart page' }))
 
     expect(Counter).toHaveBeenCalledTimes(3)
@@ -310,7 +311,7 @@ describe('Cart Page', () => {
     expect(price.textContent).toBe(`$${products[2].price}`)
     expect(screen.getAllByTestId('product-cart-page').length).toBe(1)
 
-    let elements = screen.getAllByRole('button', { name: /remove/i })
+    const elements = screen.getAllByRole('button', { name: /remove/i })
     await user.click(elements[0])
 
     expect(screen.queryAllByTestId('product-cart-page').length).toBe(0)

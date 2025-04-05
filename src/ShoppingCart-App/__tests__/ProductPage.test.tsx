@@ -1,7 +1,7 @@
 import Counter from '../Counter.jsx'
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { render, screen, cleanup, act } from '@testing-library/react'
-import { userEvent } from '@testing-library/user-event'
+import { UserEvent, userEvent } from '@testing-library/user-event'
 import { routes } from '../../routes.jsx'
 import {
   createMemoryRouter,
@@ -57,9 +57,10 @@ vi.mock('../Counter.jsx', { spy: true })
 describe('Product Page', () => {
   const getProductLinks = async () =>
     screen.findAllByRole('link', { name: 'product page' })
-  const goToHome = async (usr) =>
+  const goToHome = async (usr: UserEvent) =>
     usr.click(screen.getByRole('link', { name: 'Shopping Cart' }))
-  const getSection = (id) => screen.getByTestId(`product-${id}-details`)
+  const getSection = (id: number) => screen.getByTestId(`product-${id}-details`)
+  const getSelect = (): HTMLInputElement => screen.getByRole('combobox')
 
   it('Snapshot', async () => {
     const { user } = await setup()
@@ -368,10 +369,10 @@ describe('Product Page', () => {
       router.navigate('/product/2')
     })
 
-    expect(screen.getByRole('combobox').value).toBe('1')
+    expect(getSelect().value).toBe('1')
     await user.click(screen.getByRole('button', { name: 'Add To Cart' }))
     await user.selectOptions(screen.getByRole('combobox'), '5')
-    expect(screen.getByRole('combobox').value).toBe('5')
+    expect(getSelect().value).toBe('5')
 
     act(() => {
       router.navigate('/cart-page')
@@ -381,7 +382,7 @@ describe('Product Page', () => {
       router.navigate('/product/2')
     })
 
-    expect(screen.getByRole('combobox').value).toBe('5')
+    expect(getSelect().value).toBe('5')
   })
 
   it("Counter just changing counter shouldn't add it to cart", async () => {
@@ -396,9 +397,9 @@ describe('Product Page', () => {
     const btn = screen.getByRole('button', { name: /^add to cart$/i })
     expect(btn.textContent).toBe('Add To Cart')
     await user.selectOptions(screen.getByRole('combobox'), '5')
-    expect(screen.getByRole('combobox').value).toBe('5')
+    expect(getSelect().value).toBe('5')
     await user.selectOptions(screen.getByRole('combobox'), '9')
-    expect(screen.getByRole('combobox').value).toBe('9')
+    expect(getSelect().value).toBe('9')
     expect(btn.textContent).not.toMatch(/^remove$/i)
     expect(btn.textContent).toBe('Add To Cart')
 

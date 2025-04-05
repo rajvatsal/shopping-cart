@@ -9,21 +9,26 @@ afterEach(() => {
 })
 
 const updateValue = vi.fn()
-const setup = (value, id = 1, isInCart = false) => ({
+const setup = () => ({
   user: userEvent.setup(),
-  ...render(<Counter {...{ isInCart, value, updateValue, id }} />),
+  ...render(
+    <Counter
+      {...{ ref: undefined, isInCart: false, value: 1, updateValue, id: 3 }}
+    />
+  ),
 })
 
 describe('Product Counter', () => {
+  const getSelect = (): HTMLInputElement => screen.getByRole('combobox')
   it('Default Value', () => {
     setup()
-    expect(screen.getByRole('combobox').value).toBe('1')
+    expect(getSelect().value).toBe('1')
     expect(screen.getAllByRole('option').length).toBe(10)
   })
 
   it('Functionality', async () => {
     const { user, rerender } = setup()
-    const select = screen.getByRole('combobox')
+    const select = getSelect()
     await user.selectOptions(select, '3')
 
     expect(select.value).toBe('3')
@@ -36,12 +41,18 @@ describe('Product Counter', () => {
 
     rerender(
       <Counter
-        {...{ value: 1, id: 1, isInCart: true, updateValue: updateValue }}
+        {...{
+          ref: undefined,
+          value: 1,
+          id: 1,
+          isInCart: true,
+          updateValue: updateValue,
+        }}
       />
     )
     await user.selectOptions(screen.getByRole('combobox'), '5')
 
-    expect(screen.getByRole('combobox').value).toBe('5')
+    expect((screen.getByRole('combobox') as HTMLInputElement).value).toBe('5')
     expect(updateValue).toHaveBeenCalledWith(1, 5, false)
   })
 
@@ -53,6 +64,7 @@ describe('Product Counter', () => {
           aria-label="product count"
         >
           <option
+            selected=""
             value="1"
           >
             1

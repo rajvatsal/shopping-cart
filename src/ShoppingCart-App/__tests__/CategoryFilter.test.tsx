@@ -1,10 +1,13 @@
 import Categories from '../CategoryFilter.jsx'
+import { vi, describe, it, expect } from 'vitest'
 import { render } from '@testing-library/react'
 import { userEvent } from '@testing-library/user-event'
 
 describe('CATEGORY FILTER', () => {
   it('Structure', () => {
-    const { getByTestId } = render(<Categories />)
+    const { getByTestId } = render(
+      <Categories add={() => 3} remove={() => 3} />
+    )
     const container = getByTestId('categories-component')
 
     expect(container).toMatchSnapshot()
@@ -28,13 +31,13 @@ describe('CATEGORY FILTER', () => {
     await user.click(getByRole('checkbox', { name: /electronics/i }))
     expect(add).toBeCalledTimes(2)
 
-    await user.click(getByRole('checkbox', { name: /^men\'s clothing/i }))
+    await user.click(getByRole('checkbox', { name: /^men's clothing/i }))
     expect(add).toBeCalledTimes(3)
 
-    await user.click(getByRole('checkbox', { name: /women\'s clothing/i }))
+    await user.click(getByRole('checkbox', { name: /women's clothing/i }))
     expect(add).toBeCalledTimes(4)
 
-    await user.click(getByRole('checkbox', { name: /^men\'s clothing/i }))
+    await user.click(getByRole('checkbox', { name: /^men's clothing/i }))
     expect(remove).toBeCalledTimes(2)
   })
 })
