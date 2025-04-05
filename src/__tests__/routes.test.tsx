@@ -9,7 +9,7 @@ import { render, screen, act } from '@testing-library/react'
 import { routes } from '../routes.jsx'
 
 vi.mock('react-router', async (importOriginal) => {
-  const original = await importOriginal()
+  const original: object = await importOriginal()
   return {
     ...original,
     ScrollRestoration: vi.fn(),
