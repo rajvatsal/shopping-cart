@@ -41,7 +41,7 @@ const { products } = await vi.hoisted(
 
 vi.mock('../../ShoppingCart-Core/api.js', () => {
   return {
-    fetchData: vi.fn(
+    fetchProducts: vi.fn(
       async () =>
         new Promise((resolve) => {
           setTimeout(() => {

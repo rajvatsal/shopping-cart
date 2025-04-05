@@ -42,7 +42,7 @@ describe('Product Counter', () => {
     await user.selectOptions(screen.getByRole('combobox'), '5')
 
     expect(screen.getByRole('combobox').value).toBe('5')
-    expect(updateValue).toHaveBeenCalledWith(1, 5)
+    expect(updateValue).toHaveBeenCalledWith(1, 5, false)
   })
 
   it('Snapshot', () => {

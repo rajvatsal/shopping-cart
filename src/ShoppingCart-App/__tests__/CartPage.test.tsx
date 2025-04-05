@@ -18,7 +18,7 @@ const { products } = await vi.hoisted(
 
 vi.mock('../../ShoppingCart-Core/api.js', () => {
   return {
-    fetchData: vi.fn().mockResolvedValue(products),
+    fetchProducts: vi.fn().mockResolvedValue(products),
   }
 })
 vi.mock('../cart-page/Product.jsx', { spy: true })
@@ -246,8 +246,9 @@ describe('Cart Page', () => {
     expect(Counter).toHaveBeenNthCalledWith(
       1,
       {
+        ref: undefined,
         isInCart: true,
-        value: '1',
+        value: 1,
         updateValue: expect.any(Function),
         id: 1,
       },
@@ -256,9 +257,10 @@ describe('Cart Page', () => {
     expect(Counter).toHaveBeenNthCalledWith(
       2,
       {
+        ref: undefined,
         isInCart: true,
         updateValue: expect.any(Function),
-        value: '1',
+        value: 1,
         id: 2,
       },
       undefined
@@ -266,9 +268,10 @@ describe('Cart Page', () => {
     expect(Counter).toHaveBeenNthCalledWith(
       3,
       {
+        ref: undefined,
         isInCart: true,
         updateValue: expect.any(Function),
-        value: '1',
+        value: 1,
         id: 3,
       },
       undefined

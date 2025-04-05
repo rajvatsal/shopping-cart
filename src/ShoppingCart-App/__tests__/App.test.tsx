@@ -1,19 +1,16 @@
-import Product from '../Product.jsx'
+import Product from '../Product.tsx'
 import { describe, it, expect, vi, afterEach } from 'vitest'
 import { userEvent } from '@testing-library/user-event'
 import { createMemoryRouter, RouterProvider } from 'react-router'
-import { routes } from '../../routes.jsx'
+import { routes } from '../../routes.tsx'
 import {
   render,
-  prettyDOM,
-  waitForElementToBeRemoved,
   act,
   screen,
   getByRole,
   waitFor,
   cleanup,
   fireEvent,
-  getByTestId,
 } from '@testing-library/react'
 
 afterEach(() => {
@@ -23,16 +20,16 @@ afterEach(() => {
 })
 
 const { products } = await vi.hoisted(
-  async () => await import('./mock-products.js')
+  async () => await import('./mock-products.ts')
 )
 
-vi.mock('../../ShoppingCart-Core/api.js', () => {
+vi.mock('../../ShoppingCart-Core/api.ts', () => {
   return {
-    fetchData: vi.fn().mockResolvedValue(products),
+    fetchProducts: vi.fn().mockResolvedValue(products),
   }
 })
 
-vi.mock('../Product.jsx', { spy: true })
+vi.mock('../Product.tsx', { spy: true })
 
 // Setup
 const setup = () => {
