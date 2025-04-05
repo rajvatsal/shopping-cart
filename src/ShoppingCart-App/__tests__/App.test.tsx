@@ -77,16 +77,6 @@ describe('App', () => {
     expect(screen.getAllByTitle(/category/i).length).toBe(4)
   })
 
-  it('Products Section Heading', async () => {
-    setup()
-    const container = screen.getByTestId('products-container')
-    await waitFor(() => {
-      expect(getByRole(container, 'heading', { level: 2 }).textContent).toMatch(
-        /Products/i
-      )
-    })
-  })
-
   it('Passes Correct Props to Product Component', async () => {
     setup()
 

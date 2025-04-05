@@ -1,3 +1,7 @@
 @import url('./_classes.scss');
 @import url('./_layouts.scss');
 @import url('./_variables.scss');
+
+.top-section {
+  padding-top: var(--sp-700);
+}

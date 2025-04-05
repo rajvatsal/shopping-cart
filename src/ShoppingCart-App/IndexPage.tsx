@@ -1,4 +1,3 @@
-import SecondaryHero from './SecondaryHero.jsx'
 import Categories from './CategoryFilter.jsx'
 import Product from './Product.jsx'
 import { indexPage, indexPage__products } from './IndexPage.module.scss'
@@ -18,8 +17,10 @@ const IndexPage = () => {
   }
 
   return (
-    <section data-testid="products-container" className={indexPage}>
-      <SecondaryHero pageName="products" />
+    <section
+      data-testid="products-container"
+      className={indexPage + ' top-section'}
+    >
       <Categories add={addFilter} remove={removeFilter} />
       <ul className={indexPage__products}>
         {products.map((product) => {

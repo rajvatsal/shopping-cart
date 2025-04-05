@@ -330,6 +330,7 @@ describe('Cart Page', () => {
 
     expect(screen.getByTestId('cart-container')).toMatchInlineSnapshot(`
       <section
+        class="undefined top-section"
         data-testid="cart-container"
       >
         <h2>

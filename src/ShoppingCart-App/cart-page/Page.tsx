@@ -4,7 +4,6 @@ import {
   page__price,
   emptyPageHeading,
 } from './Page.module.scss'
-import SecondaryHero from '../SecondaryHero.jsx'
 import Product from './Product.tsx'
 import { useOutletContext } from 'react-router'
 import { AppContext } from '../App.tsx'
@@ -27,8 +26,7 @@ const CartPage = () => {
 
   return (
     <>
-      <SecondaryHero pageName="cart" />
-      <section data-testid="cart-container" className={page}>
+      <section data-testid="cart-container" className={page + ' top-section'}>
         {cartDetails.length === 0 ? (
           <h2 className={emptyPageHeading}>Cart is empty :..(</h2>
         ) : (
